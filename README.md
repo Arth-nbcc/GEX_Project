@@ -46,7 +46,7 @@ The main character is a spaceship having different launch paddles of bullets. Th
 
 ## _D. Sketch of Main Character_ 🎨
 
-![main character](alienspaceship.png)
+![main character](photos/alienspaceship.png)
 
 This is main character of space-shooter game. It is in .png form so background will be ignored automatically. The main character Avtar is very dark, scary and looks like violent spaceship.
 
@@ -72,13 +72,15 @@ Primary opponents
 
     1.	Small ships
 
-![small ship](enemyFollow.png)
+![small ship](photos/enemyFollow.png)
 
     2.	Alien’s ship
-![Alien](ship.png)
+
+![Alien](photos/ship.png)
 
     3.	Final Boss
-![Boss](enemyMoveLeft.png)
+
+![Boss](photos/enemyMoveLeft.png)
 
 (NOTE: The enemy and main character sketch could be change)
 
@@ -90,9 +92,9 @@ The space-shooter game is based on space map. The map is dark, colored, and some
 
 Below is some textures of the mountains that will be present on the space map.
 
-![texture](MountainsBG.png)
+![texture](photos/MountainsBG.png)
 
-![texture](MountainsBG2.png)
+![texture](photos/MountainsBG2.png)
 
 ---
 
@@ -103,7 +105,7 @@ So, the action is from left to right.
 
 For Example,
 
-![World](world.jpeg)
+![World](photos/world.jpeg)
 
 ---
 
