@@ -8,8 +8,18 @@ class Game
 {
 private:
 	sf::RenderWindow* window;
-	Player* player;
+
+	//text
+	sf::Font font;
+	std::vector<sf::Text>followPlayerTexts;
+	std::vector<sf::Text>staticPlayerTexts;
+
+	//players
+	std::vector<Player> players;
+
+	//Textures
 	sf::Texture playerTexture;
+	sf::Texture	bulletTexture;
 
 public:
 	Game(sf::RenderWindow* window);
@@ -17,12 +27,16 @@ public:
 
 	//Accessors
 	inline		sf::RenderWindow& getWindow() { return *this->window; } //de-reference //it will not create seperate memory, it willl just copy code directly to calling function.
+
 	//Setters
 
 	//functions
+	void		InitUI();
+	void		UpdateUI();
+	void		CombateUpdate();
 	void		update();
 	void		draw();
-
+	void		DrawUI();
 };
 
 //NOTE: to acess member of a function or variable, we use . operator.
