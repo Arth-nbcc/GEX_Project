@@ -34,6 +34,11 @@ Player::Player(sf::Texture* texture, sf::Texture* bulletTexture,
 	this->controls[controls::RIGHT] = RIGHT;
 	this->controls[controls::SHOOT] = SHOOT;
 
+	this->maxVelocity = 20.f;
+	this->acceleration = 1.f;
+	this->stabilizerForce = 0.3f;
+
+
 	this->playerNr = Player::playerNr;
 	Player::players++;
 }
@@ -44,17 +49,81 @@ Player::~Player()
 
 void Player::Movement()
 {
+	//UP
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::UP])))
-		this->sprite.move(0.f, -10.f);
+	{
+		this->direction.x = 0.f;
+		this->direction.y = -1.f;
 
+		if (this->currentVelocity.y > -this->maxVelocity && this->direction.y < 0)
+			this->currentVelocity.y += this->direction.y * this->acceleration;
+	}
+
+	//DOWN
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::DOWN])))
-		this->sprite.move(0.f, 10.f);
+	{
+		this->direction.x = 0.f;
+		this->direction.y = 1.f;
 
+		if (this->currentVelocity.y < this->maxVelocity && this->direction.y > 0)
+			this->currentVelocity.y += this->direction.y * this->acceleration;
+	}
+
+	//LEFT
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::LEFT])))
-		this->sprite.move(-10.f, 0.f);
+	{
+		this->direction.x = -1.f;
+		this->direction.y = 0.f;
 
+		if (this->currentVelocity.x > -this->maxVelocity && this->direction.x < 0)
+			this->currentVelocity.x += this->direction.x * this->acceleration;
+	}
+
+	//RIGHT
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::RIGHT])))
-		this->sprite.move(10.f, 0.f);
+	{
+		this->direction.x = 1.f;
+		this->direction.y = 0.f;
+
+		if (this->currentVelocity.x < this->maxVelocity && this->direction.x > 0)
+			this->currentVelocity.x += this->direction.x * this->acceleration;
+	}
+
+	//staliziler Force (it will make aircraft (0,0))
+	//for X
+	if (this->currentVelocity.x > 0)
+	{
+		this->currentVelocity.x -= this->stabilizerForce;
+
+		if (this->currentVelocity.x < 0)
+			this->currentVelocity.x = 0;
+	}
+	else if (this->currentVelocity.x < 0)
+	{
+		this->currentVelocity.x += this->stabilizerForce;
+
+		if (this->currentVelocity.x > 0)
+			this->currentVelocity.x = 0;
+	}
+
+	//for Y
+	if (this->currentVelocity.y > 0)
+	{
+		this->currentVelocity.y -= this->stabilizerForce;
+
+		if (this->currentVelocity.y < 0)
+			this->currentVelocity.y = 0;
+	}
+	else if (this->currentVelocity.y < 0)
+	{
+		this->currentVelocity.y += this->stabilizerForce;
+
+		if (this->currentVelocity.y > 0)
+			this->currentVelocity.y = 0;
+	}
+
+	//final move
+	this->sprite.move(this->currentVelocity.x, this->currentVelocity.y);
 }
 
 void Player::Combact()
@@ -64,8 +133,8 @@ void Player::Combact()
 	{
 		this->bullets.push_back(
 			Bullet(bulletTexture, this->playerCenter,
-				sf::Vector2f(1.f, 0.f), 4.f,
-				30.f, 0.5f));
+				sf::Vector2f(1.f, 0.f), 2.f,
+				40.f, 1.f));
 
 		this->shootTimer = 0; //RESET TIMER
 	}
