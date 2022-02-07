@@ -3,6 +3,7 @@
 #include"SFML/System.hpp"
 #include"SFML/Audio.hpp"
 #include<iostream>
+#include <vector>
 
 class Game
 {
@@ -18,8 +19,7 @@ private:
 	std::vector<Player> players;
 
 	//Textures
-	sf::Texture playerTexture;
-	sf::Texture	bulletTexture;
+	std::vector<sf::Texture> textures;
 
 public:
 	Game(sf::RenderWindow* window);

@@ -1,5 +1,7 @@
 #include "Game.h"
 
+enum textures { player = 0, laser1, missile1, mainGun1 };
+
 Game::Game(sf::RenderWindow* window)
 {
 	this->window = window;
@@ -9,16 +11,24 @@ Game::Game(sf::RenderWindow* window)
 	this->font.loadFromFile("Fonts/Dosis-Light.ttf");
 
 	//init textures
-	this->playerTexture.loadFromFile("Textures/ship.png");
-	this->bulletTexture.loadFromFile("Textures/missile1.png");
+	this->textures.push_back(sf::Texture());
+	this->textures[player].loadFromFile("Textures/Ships/ship.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[laser1].loadFromFile("Textures/Guns/laser1.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[missile1].loadFromFile("Textures/Guns/missile1.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
 
 	//init player
 	//1 player
-	this->players.push_back(Player(&playerTexture, &bulletTexture));
+	this->players.push_back(Player(this->textures));
 
 	//2nd player
-	/*
-	this->players.push_back(Player(&playerTexture, &bulletTexture,
+	/*this->players.push_back(Player(this->textures,
 		sf::Keyboard::I, sf::Keyboard::K, sf::Keyboard::J, sf::Keyboard::L, sf::Keyboard::RShift));
 	*/
 
@@ -33,7 +43,6 @@ Game::~Game()
 void Game::CombateUpdate()
 {
 	//window bounds
-
 }
 
 void Game::update()

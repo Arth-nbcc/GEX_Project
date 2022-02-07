@@ -1,6 +1,7 @@
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Texture* texture, sf::Vector2f position,
+Bullet::Bullet(sf::Texture* texture,
+	sf::Vector2f position, sf::Vector2f scale,
 	sf::Vector2f direction, float initialVelocity,
 	float maxVelocity, float acceleration)
 {
@@ -13,7 +14,7 @@ Bullet::Bullet(sf::Texture* texture, sf::Vector2f position,
 		initialVelocity * this->direction.x,
 		initialVelocity * this->direction.y);
 
-	this->sprite.setScale(0.1f, 0.1f);
+	this->sprite.setScale(scale);
 	this->sprite.setPosition(
 		sf::Vector2f(
 			position.x - this->sprite.getGlobalBounds().width / 2,

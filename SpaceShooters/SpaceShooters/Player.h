@@ -12,13 +12,17 @@ private:
 	int damageTimer;
 	int damageTimerMax;
 
-	sf::Texture* texture;
-	sf::Texture* bulletTexture;
-
 	sf::Sprite			sprite;
 	sf::RectangleShape	hitbox;
 
+	//Accessories
+	sf::Sprite	 mainGunSprite;
+
 	std::vector<Bullet> bullets;
+
+	sf::Texture* missile1Texture;
+	sf::Texture* missile2Texture;
+	sf::Texture* laserTexture;
 
 	int controls[5];
 
@@ -29,20 +33,28 @@ private:
 	sf::Vector2f	direction;
 	float			stabilizerForce;
 
-	int level;
-	int exp;
-	int expNext;
+	int		level;
+	int		exp;
+	int		expNext;
 
-	int HP;
-	int hpMax;
+	int		HP;
+	int		hpMax;
 
-	int damage;
-	int damageMax;
+	int		damage;
+	int		damageMax;
 
-	int score;
+	int		score;
+
+	int		currentWeapon;
+
+	//upgrades
+	int		mainGunLevel;
+	bool	dualMissile1;
+	bool	dualMissile2;
+
 
 public:
-	Player(sf::Texture* texture, sf::Texture* bulletTexture,
+	Player(std::vector<sf::Texture>& textures,
 		int UP = 22, int DOWN = 18,
 		int LEFT = 0, int RIGHT = 3,
 		int SHOOT = 57);
@@ -55,6 +67,7 @@ public:
 	inline const sf::String getHpAsString()const { return std::to_string(this->HP) + "/" + std::to_string(this->hpMax); }
 
 	//functions
+	void	UpdateAccessories();
 	void	Combact();
 	void	Movement(); //for keyboard
 	void	Update(sf::Vector2u windowBounds);

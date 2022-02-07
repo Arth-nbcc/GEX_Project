@@ -17,7 +17,8 @@ private:
 	sf::Vector2f direction;
 
 public:
-	Bullet(sf::Texture* texture, sf::Vector2f position,
+	Bullet(sf::Texture* texture,
+		sf::Vector2f position, sf::Vector2f scale,
 		sf::Vector2f direction, float initialVelocity,
 		float maxVelocity, float acceleration);
 
