@@ -3,6 +3,7 @@
 #include"SFML/Audio.hpp"
 #include<vector>
 #include<iostream>
+#include<cstdlib>
 
 
 class Bullet
@@ -25,8 +26,8 @@ public:
 	virtual ~Bullet();
 
 	//Accessors
-	inline const sf::FloatRect& getGlobalBounds() const { return this->sprite.getGlobalBounds(); }
-	inline const sf::Vector2f& getPosition() const { return this->sprite.getPosition(); }
+	inline sf::FloatRect getGlobalBounds() const { return this->sprite.getGlobalBounds(); }
+	inline sf::Vector2f getPosition() const { return this->sprite.getPosition(); }
 
 	//functions
 	void  Movement();

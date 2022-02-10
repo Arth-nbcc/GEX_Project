@@ -13,11 +13,12 @@ Player::Player(std::vector<sf::Texture>& textures,
 	:level(1)
 	, exp(0)
 	, expNext(100)
-	, HP(10)
+	, hp(10)
 	, hpMax(10)
 	, damage(1)
 	, damageMax(2)
 	, score(0)
+
 {
 	//update positions
 	//player Center
@@ -34,6 +35,9 @@ Player::Player(std::vector<sf::Texture>& textures,
 	this->laserTexture = &textures[1];
 	this->missile1Texture = &textures[2];
 	//this->missile2Texture = &textures[1];
+
+	//enemy
+
 
 	//gun
 	this->mainGunSprite.setTexture(textures[3]);

@@ -1,9 +1,7 @@
+
 #include"Player.h"
-#include"SFML/Graphics.hpp"
-#include"SFML/System.hpp"
-#include"SFML/Audio.hpp"
-#include<iostream>
-#include <vector>
+#include "Enemy.h"
+
 
 class Game
 {
@@ -14,12 +12,20 @@ private:
 	sf::Font font;
 	std::vector<sf::Text>followPlayerTexts;
 	std::vector<sf::Text>staticPlayerTexts;
+	sf::Text enemyText;
 
 	//players
 	std::vector<Player> players;
 
 	//Textures
 	std::vector<sf::Texture> textures;
+
+	//Enemies
+	std::vector<Enemy> enemies;
+	std::vector<Enemy> enemiesSaved;
+
+	int		enemySpawnTimer;
+	int		enemySpawnTimerMax;
 
 public:
 	Game(sf::RenderWindow* window);

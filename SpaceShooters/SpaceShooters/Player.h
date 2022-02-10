@@ -7,11 +7,6 @@ private:
 
 	sf::Vector2f playerCenter;
 
-	int shootTimer;
-	int shootTimerMax;
-	int damageTimer;
-	int damageTimerMax;
-
 	sf::Sprite			sprite;
 	sf::RectangleShape	hitbox;
 
@@ -23,6 +18,7 @@ private:
 	sf::Texture* missile1Texture;
 	sf::Texture* missile2Texture;
 	sf::Texture* laserTexture;
+
 
 	int controls[5];
 
@@ -37,7 +33,7 @@ private:
 	int		exp;
 	int		expNext;
 
-	int		HP;
+	int		hp;
 	int		hpMax;
 
 	int		damage;
@@ -52,6 +48,10 @@ private:
 	bool	dualMissile1;
 	bool	dualMissile2;
 
+	int shootTimer;
+	int shootTimerMax;
+	int damageTimer;
+	int damageTimerMax;
 
 public:
 	Player(std::vector<sf::Texture>& textures,
@@ -64,7 +64,11 @@ public:
 	//Accessors
 	inline std::vector<Bullet>& getBullets() { return this->bullets; } //reference for bullets
 	inline const sf::Vector2f& getPosition() const { return this->sprite.getPosition(); }
-	inline const sf::String getHpAsString()const { return std::to_string(this->HP) + "/" + std::to_string(this->hpMax); }
+	inline const sf::String getHpAsString()const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
+	inline const int getdamage()const { return rand() % this->damageMax + this->damage; }
+	inline sf::FloatRect getGlobalBounds()const { return this->sprite.getGlobalBounds(); }
+	inline const int& getHp()const { return this->hp; }
+	inline const int& getHpMax()const { return this->hpMax; }
 
 	//functions
 	void	UpdateAccessories();

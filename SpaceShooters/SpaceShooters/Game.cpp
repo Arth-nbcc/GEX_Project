@@ -1,6 +1,6 @@
 #include "Game.h"
 
-enum textures { player = 0, laser1, missile1, mainGun1 };
+enum textures { player = 0, laser1, missile1, mainGun1, enemy1 };
 
 Game::Game(sf::RenderWindow* window)
 {
@@ -23,13 +23,30 @@ Game::Game(sf::RenderWindow* window)
 	this->textures.push_back(sf::Texture());
 	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
 
+	this->textures.push_back(sf::Texture());
+	this->textures[enemy1].loadFromFile("Textures/Ships/enemy1.png");
+
 	//init player
 	//1 player
 	this->players.push_back(Player(this->textures));
 
+	//init Enemies
+	Enemy e1(
+		&this->textures[enemy1], this->window->getSize(),
+		sf::Vector2f(0.f, 0.f),
+		sf::Vector2f(-1.f, 0.f), sf::Vector2f(0.1f, 0.1f),
+		0, rand() % 3 + 1, 3, 1);
+
+	this->enemiesSaved.push_back(Enemy(e1));
+
+	this->enemySpawnTimer = 10;
+	this->enemySpawnTimerMax = this->enemySpawnTimerMax;
+
 	//2nd player
 	/*this->players.push_back(Player(this->textures,
-		sf::Keyboard::I, sf::Keyboard::K, sf::Keyboard::J, sf::Keyboard::L, sf::Keyboard::RShift));
+		sf::Keyboard::I, sf::Keyboard::K,
+		sf::Keyboard::J, sf::Keyboard::L,
+		sf::Keyboard::RShift));
 	*/
 
 	this->InitUI();
@@ -47,9 +64,25 @@ void Game::CombateUpdate()
 
 void Game::update()
 {
+	//update timers
+	if (this->enemySpawnTimer < this->enemySpawnTimerMax)
+		this->enemySpawnTimer++;
+
+	//spawn enemies
+	if (this->enemySpawnTimer >= this->enemySpawnTimerMax)
+	{
+		this->enemies.push_back(Enemy(
+			&this->textures[enemy1], this->window->getSize(),
+			sf::Vector2f(0.f, 0.f),
+			sf::Vector2f(-1.f, 0.f), sf::Vector2f(0.1f, 0.1f),
+			0, rand() % 3 + 1, 3, 1));
+
+		this->enemySpawnTimer = 0;	//Reset timer
+	}
+
 	for (size_t i = 0; i < this->players.size(); i++)
 	{
-		//Update players
+		//UPDATE PLAYERS
 		this->players[i].Update(this->window->getSize());
 
 		//Bullets update
@@ -57,27 +90,67 @@ void Game::update()
 		{
 			this->players[i].getBullets()[k].Update();
 
-			//window bound check, remove bullets
+			//Enemy collision check
+			for (size_t j = 0; j < this->enemies.size(); j++)
+			{
+				if (this->players[i].getBullets()[k].getGlobalBounds().intersects(this->enemies[j].getGlobalBounds()))
+				{
+					std::cout << "HIT" << "\n";
+					this->players[i].getBullets().erase(this->players[i].getBullets().begin() + k);
+
+					if (this->enemies[j].getHP() > 0)
+						this->enemies[j].takeDamage(this->players[i].getdamage());
+
+					if (this->enemies[j].getHP() <= 0)
+						std::cout << "ERase" << "\n";
+					this->enemies.erase(this->enemies.begin() + j);
+
+					return;	//RETURN!!!
+				}
+			}
+			//Window bounds check
 			if (this->players[i].getBullets()[k].getPosition().x > this->window->getSize().x)
 			{
 				this->players[i].getBullets().erase(this->players[i].getBullets().begin() + k);
-				break; //break!!!
+				return;	//RETURN!!!
 			}
-
-			//enemy collision check
 		}
 	}
+	//erase enemy when reaching out to the boundry
+	for (size_t i = 0; i < this->enemies.size(); i++)
+	{
+		this->enemies[i].Update();
+
+		if (this->enemies[i].getPosition().x < 0 - this->enemies[i].getGlobalBounds().width)
+		{
+			this->enemies.erase(this->enemies.begin() + i);
+			break; //break !!!
+		}
+	}
+
 	//Update UI
 	this->UpdateUI();
-
 }
 
 void Game::draw()
 {
 	this->window->clear();
+
 	for (size_t i = 0; i < this->players.size(); i++)
 	{
 		players[i].Draw(*this->window);
+	}
+
+	for (size_t i = 0; i < this->enemies.size(); i++)
+	{
+		this->enemyText.setPosition(this->enemies[i].getPosition());
+		this->enemyText.setString(
+			std::to_string(this->enemies[i].getHP())
+			+ "/" +
+			std::to_string(this->enemies[i].getHPMax()));
+
+		this->enemies[i].Draw(*this->window);
+		this->window->draw(this->enemyText);
 	}
 	this->DrawUI();
 	this->window->display();
@@ -93,6 +166,7 @@ void Game::DrawUI()
 	{
 		this->window->draw(this->staticPlayerTexts[i]);
 	}
+
 }
 
 void Game::InitUI()
@@ -117,6 +191,11 @@ void Game::InitUI()
 
 		this->staticPlayerTexts.push_back(sf::Text(tempText));
 	}
+
+	this->enemyText.setFont(this->font);
+	this->enemyText.setCharacterSize(14);
+	this->enemyText.setFillColor(sf::Color::White);
+
 }
 
 void Game::UpdateUI()

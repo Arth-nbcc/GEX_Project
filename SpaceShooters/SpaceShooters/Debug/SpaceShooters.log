@@ -1,3 +1,11 @@
-﻿  Main.cpp
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\Debug\SpaceShooters.exe : fatal error LNK1120: 1 unresolved externals
+﻿  Bullet.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Bullet.h(1,9): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Enemy.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Bullet.h(1,9): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Game.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Bullet.h(1,9): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Main.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Bullet.h(1,9): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Player.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Bullet.h(1,9): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Generating Code...
