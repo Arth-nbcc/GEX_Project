@@ -2,7 +2,6 @@
 #include"Player.h"
 #include "Enemy.h"
 
-
 class Game
 {
 private:
@@ -10,12 +9,14 @@ private:
 
 	//text
 	sf::Font font;
-	std::vector<sf::Text>followPlayerTexts;
-	std::vector<sf::Text>staticPlayerTexts;
+	sf::Text followPlayerTexts;
+	sf::Text staticPlayerTexts;
 	sf::Text enemyText;
+	sf::Text gameOverText;
 
 	//players
 	std::vector<Player> players;
+	int playersAlive;
 
 	//Textures
 	std::vector<sf::Texture> textures;
@@ -38,7 +39,8 @@ public:
 
 	//functions
 	void		InitUI();
-	void		UpdateUI();
+	void		UpdateUIPlayer(int index);
+	void		UpdateUIEnemy(int index);
 	void		CombateUpdate();
 	void		update();
 	void		draw();

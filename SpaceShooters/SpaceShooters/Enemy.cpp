@@ -14,7 +14,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u windowBounds,
 
 	this->direction = direction;
 
-	this->sprite.setPosition(windowBounds.x, (rand() % windowBounds.y) - this->sprite.getGlobalBounds().height);
+	this->sprite.setPosition(this->windowBounds.x, (rand() % this->windowBounds.y) - this->sprite.getGlobalBounds().height);
 
 	this->type = type;
 
@@ -53,4 +53,7 @@ void Enemy::Update()
 
 void Enemy::Draw(sf::RenderTarget& target)
 {
+	target.draw(this->sprite);
+	//draw here
+
 }

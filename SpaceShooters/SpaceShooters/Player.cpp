@@ -12,7 +12,7 @@ Player::Player(std::vector<sf::Texture>& textures,
 	int SHOOT)
 	:level(1)
 	, exp(0)
-	, expNext(100)
+	, expNext(100) /////
 	, hp(10)
 	, hpMax(10)
 	, damage(1)
@@ -73,7 +73,7 @@ Player::Player(std::vector<sf::Texture>& textures,
 
 	//upgrades
 	this->mainGunLevel = 0;
-	this->dualMissile1 = false;
+	this->dualMissile1 = true;
 	this->dualMissile2 = false;
 
 	//add number of player
@@ -83,6 +83,33 @@ Player::Player(std::vector<sf::Texture>& textures,
 
 Player::~Player()
 {
+}
+
+int Player::getdamage() const
+{
+	int damage = 0;
+
+	switch (this->currentWeapon)
+	{
+	case LASER:
+		damage = rand() % this->damageMax + this->damage;
+		break;
+
+	case MISSILE1:
+		damage = rand() % this->damageMax + this->damage;
+		damage *= 2;	//double damage
+		break;
+
+	case MISSILE2:
+		damage = rand() % this->damageMax + this->damage;
+		damage *= 3;	//3 times damage
+		break;
+
+	default:
+		damage = rand() % this->damageMax + this->damage;
+		break;
+	}
+	return damage;
 }
 
 void Player::Movement()

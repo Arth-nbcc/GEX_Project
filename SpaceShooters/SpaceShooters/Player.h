@@ -65,10 +65,13 @@ public:
 	inline std::vector<Bullet>& getBullets() { return this->bullets; } //reference for bullets
 	inline const sf::Vector2f& getPosition() const { return this->sprite.getPosition(); }
 	inline const sf::String getHpAsString()const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
-	inline const int getdamage()const { return rand() % this->damageMax + this->damage; }
+	int getdamage()const;
 	inline sf::FloatRect getGlobalBounds()const { return this->sprite.getGlobalBounds(); }
 	inline const int& getHp()const { return this->hp; }
 	inline const int& getHpMax()const { return this->hpMax; }
+	inline void takeDamage(int damage) { this->hp -= damage; }
+	inline bool isAlive()const { return this->hp > 0; }
+
 
 	//functions
 	void	UpdateAccessories();

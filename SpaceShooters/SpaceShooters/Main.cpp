@@ -4,7 +4,7 @@ int main()
 {
 	//window
 	sf::RenderWindow window(sf::VideoMode(1720, 880), "Space-Shooters", sf::Style::Default);
-	window.setFramerateLimit(60);
+	window.setFramerateLimit(65);
 
 	Game game(&window);
 
