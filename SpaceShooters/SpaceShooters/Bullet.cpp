@@ -19,7 +19,6 @@ Bullet::Bullet(sf::Texture* texture,
 		sf::Vector2f(
 			position.x - this->sprite.getGlobalBounds().width / 2,
 			position.y - this->sprite.getGlobalBounds().height / 2));
-
 }
 
 Bullet::~Bullet()
@@ -31,11 +30,15 @@ void Bullet::Movement()
 	if (this->acceleration > 0.f)
 	{
 		if (this->currentVelocity.x < this->maxVelocity)
-			//accelarate in the pressed direction, valocity increasing by accelaration and multiply by direction
+			///
+			///accelerate in the pressed direction, velocity increasing by acceleration and multiply by direction
+			///
 			this->currentVelocity.x += this->acceleration * this->direction.x;
 
 		if (this->currentVelocity.y < this->maxVelocity)
-			//accelarate in the pressed direction, valocity increasing by accelaration and multiply by direction
+			///
+			///accelarate in the pressed direction, valocity increasing by accelaration and multiply by direction
+			///
 			this->currentVelocity.y += this->acceleration * this->direction.y;
 	}
 	else

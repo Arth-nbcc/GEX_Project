@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <fstream>
 
 enum textures { player = 0, laser1, missile1, mainGun1, enemy1 };
 
@@ -7,39 +8,33 @@ Game::Game(sf::RenderWindow* window)
 	this->window = window;
 	this->window->setFramerateLimit(65);
 
-	//init fonts
+	/// <summary>
+	/// init fonts
+	/// </summary>
 	this->font.loadFromFile("Fonts/Dosis-Light.ttf");
 
-	//init textures
-	this->textures.push_back(sf::Texture());
-	this->textures[player].loadFromFile("Textures/Ships/ship.png");
+	/// <summary>
+	/// init Textures
+	/// </summary>
+	this->initTextures();
 
-	this->textures.push_back(sf::Texture());
-	this->textures[laser1].loadFromFile("Textures/Guns/laser1.png");
-
-	this->textures.push_back(sf::Texture());
-	this->textures[missile1].loadFromFile("Textures/Guns/missile1.png");
-
-	this->textures.push_back(sf::Texture());
-	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
-
-	this->textures.push_back(sf::Texture());
-	this->textures[enemy1].loadFromFile("Textures/Ships/enemy1.png");
-
-	//init player
-	//1 player
+	/// <summary>
+	/// init player
+	/// </summary>
 	this->players.push_back(Player(this->textures));
 
-	//init Enemies (object)
+	/// <summary>
+	/// init Enemies (object)
+	/// </summary>
 	Enemy e1(
 		&this->textures[enemy1], this->window->getSize(),
 		sf::Vector2f(0.f, 0.f),
 		sf::Vector2f(-1.f, 0.f), sf::Vector2f(0.1f, 0.1f),
-		0, rand() % 3 + 1, 3, 1);
+		rand() % 2, rand() % 3 + 1, 3, 1);
 
 	this->enemiesSaved.push_back(Enemy(e1));
 
-	this->enemySpawnTimerMax = 20;
+	this->enemySpawnTimerMax = 20.f;
 	this->enemySpawnTimer = this->enemySpawnTimerMax;
 
 
@@ -58,20 +53,43 @@ Game::~Game()
 
 }
 
-void Game::CombateUpdate()
+void Game::initTextures()
 {
-	//window bounds
+	/// <summary>
+	/// init textures regular
+	/// </summary>
+	this->textures.push_back(sf::Texture());
+	this->textures[player].loadFromFile("Textures/Ships/ship.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[laser1].loadFromFile("Textures/Guns/laser1.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[missile1].loadFromFile("Textures/Guns/missile1.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
+
+	this->textures.push_back(sf::Texture());
+	this->textures[enemy1].loadFromFile("Textures/Ships/enemy1.png");
+
+	//init aura textures
+
 }
 
 void Game::update()
 {
 	if (this->players.size() > 0)
 	{
-		//update timers
+		/// <summary>
+		/// update timer
+		/// </summary>
 		if (this->enemySpawnTimer < this->enemySpawnTimerMax)
 			this->enemySpawnTimer++;
 
-		//spawn enemies
+		/// <summary>
+		/// spawn enemies
+		/// </summary>
 		if (this->enemySpawnTimer >= this->enemySpawnTimerMax)
 		{
 			this->enemies.push_back(Enemy(
@@ -80,22 +98,33 @@ void Game::update()
 				sf::Vector2f(-1.f, 0.f), sf::Vector2f(0.1f, 0.1f),
 				0, rand() % 3 + 1, 3, 1));
 
-			this->enemySpawnTimer = 0;	//Reset timer
+			/// <summary>
+			/// Reset timer
+			/// </summary>
+			this->enemySpawnTimer = 0;
 		}
-		//update players, bullets and combat
+		/// <summary>
+		/// update players, bullets and combat
+		/// </summary>
 		for (size_t i = 0; i < this->players.size(); i++)
 		{
 			if (this->players[i].isAlive())
 			{
-				//UPDATE PLAYERS
+				/// <summary>
+				/// UPDATE PLAYERS
+				/// </summary>
 				this->players[i].Update(this->window->getSize());
 
-				//Bullets update
+				/// <summary>
+				/// Bullets update
+				/// </summary>
 				for (size_t k = 0; k < this->players[i].getBullets().size(); k++)
 				{
 					this->players[i].getBullets()[k].Update();
 
-					//Enemy collision check with bullets
+					/// <summary>
+					/// Enemy collision check with bullets
+					/// </summary>
 					for (size_t j = 0; j < this->enemies.size(); j++)
 					{
 						if (this->players[i].getBullets()[k].getGlobalBounds().intersects(this->enemies[j].getGlobalBounds()))
@@ -103,11 +132,29 @@ void Game::update()
 							//std::cout << "HIT" << "\n";
 							this->players[i].getBullets().erase(this->players[i].getBullets().begin() + k);
 
-							//enemy take damage check
+							/// <summary>
+							/// enemy take damage check
+							/// </summary>
+							int damage = this->players[i].getdamage();
 							if (this->enemies[j].getHP() > 0)
-								this->enemies[j].takeDamage(this->players[i].getdamage());
+							{
+								this->enemies[j].takeDamage(damage);
 
-							//enemy dead
+								//textTags
+								this->textTags.push_back(
+									TextTag(
+										&this->font,
+										"-" + std::to_string(damage),
+										sf::Color::Red,
+										sf::Vector2f(
+											this->enemies[j].getPosition().x + 20.f,
+											this->enemies[j].getPosition().y - 20.f),
+										30, 20.f));
+							}
+
+							/// <summary>
+							/// enemy dead
+							/// </summary>
 							if (this->enemies[j].getHP() <= 0)
 								//std::cout << "ERase" << "\n";
 								this->enemies.erase(this->enemies.begin() + j);
@@ -115,7 +162,9 @@ void Game::update()
 							return;	//RETURN!!!
 						}
 					}
-					//Window bounds check
+					/// <summary>
+					/// Window bounds check
+					/// </summary>
 					if (this->players[i].getBullets()[k].getPosition().x > this->window->getSize().x)
 					{
 						this->players[i].getBullets().erase(this->players[i].getBullets().begin() + k);
@@ -124,7 +173,9 @@ void Game::update()
 				}
 			}
 		}
-		//player-enemy collision
+		/// <summary>
+		/// player-enemy collision
+		/// </summary>
 		for (size_t i = 0; i < this->enemies.size(); i++)
 		{
 			this->enemies[i].Update();
@@ -135,8 +186,21 @@ void Game::update()
 				{
 					if (this->players[k].isAlive())
 					{
-						this->players[k].takeDamage(this->enemies[i].getDamage());
+						int damage = this->enemies[i].getDamage();
+						this->players[k].takeDamage(damage);
 
+						//textTags
+						this->textTags.push_back(
+							TextTag(
+								&this->font,
+								"-" + std::to_string(damage),
+								sf::Color::Red,
+								sf::Vector2f(
+									this->players[k].getPosition().x + 20.f,
+									this->players[k].getPosition().y - 20.f),
+								30, 20.f));
+
+						//player death
 						if (!this->players[k].isAlive())
 							this->playersAlive--;
 
@@ -145,11 +209,24 @@ void Game::update()
 					}
 				}
 			}
-
+			/// <summary>
+			/// erase enemy when out of window
+			/// </summary>
 			if (this->enemies[i].getPosition().x < 0 - this->enemies[i].getGlobalBounds().width)
 			{
 				this->enemies.erase(this->enemies.begin() + i);
 				return; //break !!!
+			}
+		}
+		//update TextTags
+		for (size_t i = 0; i < this->textTags.size(); i++)
+		{
+			this->textTags[i].Update();
+
+			if (this->textTags[i].getTimer() <= 0.f)
+			{
+				this->textTags.erase(this->textTags.begin() + i);
+				break;
 			}
 		}
 	}
@@ -186,16 +263,22 @@ void Game::draw()
 {
 	this->window->clear();
 
-	//enemy
+	/// <summary>
+	/// enemy Draw
+	/// </summary>
 	for (size_t i = 0; i < this->enemies.size(); i++)
 	{
 		this->enemies[i].Draw(*this->window);
-		//UI
+		/// <summary>
+		/// UI
+		/// </summary>
 		this->UpdateUIEnemy(i);
 		this->window->draw(this->enemyText);
 	}
 
-	//player
+	/// <summary>
+	/// Player Draw
+	/// </summary>
 	for (size_t i = 0; i < this->players.size(); i++)
 	{
 		if (this->players[i].isAlive())
@@ -203,11 +286,22 @@ void Game::draw()
 			players[i].Draw(*this->window);
 			//UI
 			this->UpdateUIPlayer(i); //update for player i
-			this->window->draw(this->followPlayerTexts); //UI update
+			/// <summary>
+			/// UI Update
+			/// </summary>
+			this->window->draw(this->followPlayerTexts);
 		}
 	}
 
-	//game over
+	//Draw TextTags
+	for (size_t i = 0; i < textTags.size(); i++)
+	{
+		this->textTags[i].Draw(*this->window);
+	}
+
+	/// <summary>
+	/// Game Over
+	/// </summary>
 	if (this->playersAlive <= 0)
 	{
 		this->window->draw(this->gameOverText);
@@ -218,29 +312,35 @@ void Game::draw()
 
 void Game::InitUI()
 {
-	sf::Text tempText;
-
-	//follow text init		
+	/// <summary>
+	/// follow text init	
+	/// </summary>
 	this->followPlayerTexts.setFont(font);
 	this->followPlayerTexts.setCharacterSize(14);
 	this->followPlayerTexts.setFillColor(sf::Color::White);
 
-	//static text init (for all players)
-	this->staticPlayerTexts.setFont(font);
-	this->staticPlayerTexts.setCharacterSize(14);
-	this->staticPlayerTexts.setFillColor(sf::Color::White);
+	/// <summary>
+	/// static text init (for all players)
+	/// </summary>
+	//this->staticPlayerTexts.setFont(font);
+	//this->staticPlayerTexts.setCharacterSize(14);
+	//this->staticPlayerTexts.setFillColor(sf::Color::White);
 
-	//enemy health
+	/// <summary>
+	/// enemy health
+	/// </summary>
 	this->enemyText.setFont(this->font);
 	this->enemyText.setCharacterSize(14);
 	this->enemyText.setFillColor(sf::Color::White);
 
-	//game over
+	/// <summary>
+	/// game over
+	/// </summary>
 	this->gameOverText.setFont(this->font);
 	this->gameOverText.setCharacterSize(60);
 	this->gameOverText.setFillColor(sf::Color::Red);
 	this->gameOverText.setString("GAME OVER!");
-	this->gameOverText.setPosition(this->window->getSize().x / 2 - 150.f, this->window->getSize().y / 2);
+	this->gameOverText.setPosition(window->getSize().x / static_cast<float>(2) - 150.f, window->getSize().y / static_cast<float>(2));
 }
 
 void Game::DrawUI()

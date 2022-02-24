@@ -5,7 +5,6 @@
 #include<iostream>
 #include<cstdlib>
 
-
 class Bullet
 {
 private:
@@ -25,11 +24,15 @@ public:
 
 	virtual ~Bullet();
 
-	//Accessors
+	///
+	///Accessors
+	///
 	inline sf::FloatRect getGlobalBounds() const { return this->sprite.getGlobalBounds(); }
 	inline sf::Vector2f getPosition() const { return this->sprite.getPosition(); }
 
-	//functions
+	///
+	///functions
+	/// 
 	void  Movement();
 
 	void  Update();

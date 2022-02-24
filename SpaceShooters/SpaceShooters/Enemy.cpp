@@ -24,6 +24,8 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u windowBounds,
 	this->damageMax = damageMax;
 	this->damageMin = damageMin;
 
+	this->damageTimerMax = 5.f;
+	this->damageTimer = 0;
 }
 
 Enemy::~Enemy()
@@ -33,22 +35,45 @@ Enemy::~Enemy()
 void Enemy::takeDamage(int damage)
 {
 	this->hp -= damage;
+	/// <summary>
+	/// reset 
+	/// </summary>
+	/// <param name="damage"></param>
+	this->damageTimer = this->damageTimerMax;
 
 	if (this->hp <= 0)
+	{
 		this->hp = 0;
+	}
 }
 
 void Enemy::Update()
 {
 	switch (this->type)
 	{
-	case 0:
+	case MOVELEFT:
 		this->sprite.move(this->direction.x * 10.f, this->direction.y * 10.f);
 		break;
 
 	default:
 		break;
 	}
+
+	if (this->damageTimer > 0.f)
+	{
+		this->damageTimer -= 1.f;
+		///
+		///while hitted, set color red
+		/// 
+		this->sprite.setColor(sf::Color::Red);
+		/// <summary>
+		/// //if hitted, moves little backwards
+		/// </summary>
+		this->sprite.move(5.f, 0.f);
+	}
+	else
+		this->sprite.setColor(sf::Color::White);
+
 }
 
 void Enemy::Draw(sf::RenderTarget& target)

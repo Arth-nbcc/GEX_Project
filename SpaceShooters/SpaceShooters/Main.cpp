@@ -2,13 +2,17 @@
 
 int main()
 {
-	//window
+	/// <summary>
+	/// Window
+	/// </summary>
 	sf::RenderWindow window(sf::VideoMode(1720, 880), "Space-Shooters", sf::Style::Default);
 	window.setFramerateLimit(65);
 
 	Game game(&window);
 
-	//Game loop
+	/// <summary>
+	/// Game Loop
+	/// </summary>
 	while (window.isOpen())
 	{
 		sf::Event event;

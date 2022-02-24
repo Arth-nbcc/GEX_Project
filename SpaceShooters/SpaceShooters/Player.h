@@ -10,7 +10,9 @@ private:
 	sf::Sprite			sprite;
 	sf::RectangleShape	hitbox;
 
-	//Accessories
+	/// <summary>
+	/// Accessories
+	/// </summary>
 	sf::Sprite	 mainGunSprite;
 
 	std::vector<Bullet> bullets;
@@ -19,10 +21,11 @@ private:
 	sf::Texture* missile2Texture;
 	sf::Texture* laserTexture;
 
-
 	int controls[5];
 
-	//player shooth movement
+	/// <summary>
+	/// player shooth movement
+	/// </summary>
 	sf::Vector2f	currentVelocity;
 	float			maxVelocity;
 	float			acceleration;
@@ -43,7 +46,9 @@ private:
 
 	int		currentWeapon;
 
-	//upgrades
+	/// <summary>
+	/// upgrades
+	/// </summary>
 	int		mainGunLevel;
 	bool	dualMissile1;
 	bool	dualMissile2;
@@ -61,9 +66,11 @@ public:
 
 	virtual ~Player();
 
-	//Accessors
+	/// <summary>
+	/// Accessors
+	/// </summary>
 	inline std::vector<Bullet>& getBullets() { return this->bullets; } //reference for bullets
-	inline const sf::Vector2f& getPosition() const { return this->sprite.getPosition(); }
+	inline const sf::Vector2f& getPosition() const { return this->sprite.getPosition(); } //bullet.h
 	inline const sf::String getHpAsString()const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
 	int getdamage()const;
 	inline sf::FloatRect getGlobalBounds()const { return this->sprite.getGlobalBounds(); }
@@ -73,14 +80,18 @@ public:
 	inline bool isAlive()const { return this->hp > 0; }
 
 
-	//functions
+	/// <summary>
+	/// functions
+	/// </summary>
 	void	UpdateAccessories();
 	void	Combact();
 	void	Movement(); //for keyboard
 	void	Update(sf::Vector2u windowBounds);
 	void	Draw(sf::RenderTarget& target);
 
-	//Statics
+	/// <summary>
+	/// Statics
+	/// </summary>
 	static	unsigned players;
 
 };

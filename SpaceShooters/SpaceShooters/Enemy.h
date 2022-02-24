@@ -14,6 +14,9 @@ private:
 	sf::Vector2u windowBounds;
 	sf::Vector2f direction;
 
+	float damageTimer;
+	float damageTimerMax;
+
 	int		type;
 	int		hp;
 	int		hpMax;
@@ -28,7 +31,9 @@ public:
 
 	virtual ~Enemy();
 
-	//Accessors
+	///
+	///Accessors
+	///
 	inline const int	getDamage()const { return rand() % this->damageMax + this->damageMin; }
 	inline const int	getHP()const { return this->hp; }
 	inline const int	getHPMax()const { return this->hpMax; }
@@ -36,7 +41,9 @@ public:
 	inline sf::FloatRect getGlobalBounds() const { return this->sprite.getGlobalBounds(); }
 	inline sf::Vector2f getPosition() const { return this->sprite.getPosition(); }
 
-	//functions
+	///
+	///functions
+	/// 
 	void	takeDamage(int damage);
 	void	Update();
 	void	Draw(sf::RenderTarget& target);

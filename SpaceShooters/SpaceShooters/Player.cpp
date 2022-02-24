@@ -11,7 +11,7 @@ Player::Player(std::vector<sf::Texture>& textures,
 	int LEFT, int RIGHT,
 	int SHOOT)
 	:level(1)
-	, exp(0)
+	, exp(0) //experience, for future implementation. if experience level ++, level increases
 	, expNext(100) /////
 	, hp(10)
 	, hpMax(10)
@@ -20,26 +20,33 @@ Player::Player(std::vector<sf::Texture>& textures,
 	, score(0)
 
 {
-	//update positions
-	//player Center
+	/// <summary>
+	/// update positions
+	/// player Center
+	/// </summary>
 	this->playerCenter.x = this->sprite.getPosition().x +
 		this->sprite.getGlobalBounds().width / 2;
 	this->playerCenter.y = this->sprite.getPosition().y +
 		this->sprite.getGlobalBounds().height / 2;
 
-	//ship (player)
+	/// <summary>
+	/// ship (player)
+	/// </summary>
 	this->sprite.setTexture(textures[0]);
 	this->sprite.setScale(0.13f, 0.13f);
 
-	//bullet & missile
+	/// <summary>
+	/// bullet & missile
+	/// </summary>
 	this->laserTexture = &textures[1];
 	this->missile1Texture = &textures[2];
 	//this->missile2Texture = &textures[1];
 
 	//enemy
 
-
-	//gun
+	/// <summary>
+	/// Gun
+	/// </summary>
 	this->mainGunSprite.setTexture(textures[3]);
 	this->mainGunSprite.setOrigin(
 		this->mainGunSprite.getGlobalBounds().width / 2,
@@ -50,7 +57,9 @@ Player::Player(std::vector<sf::Texture>& textures,
 		this->playerCenter.x + 20.f,
 		this->playerCenter.y);
 
-	//timing for shoot
+	/// <summary>
+	/// timing for shoot
+	/// </summary>
 	this->shootTimerMax = 25;
 	this->shootTimer = this->shootTimerMax;
 	this->damageTimer = 10;
@@ -63,12 +72,18 @@ Player::Player(std::vector<sf::Texture>& textures,
 	this->controls[controls::RIGHT] = RIGHT;
 	this->controls[controls::SHOOT] = SHOOT;
 
-	//maxspeed, accelaration, force
+	/// <summary>
+	/// maxspeed, accelaration, force
+	/// </summary>
 	this->maxVelocity = 20.f;
 	this->acceleration = 1.f;
 	this->stabilizerForce = 0.3f;
 
-	//current weapon
+	//aura
+
+	/// <summary>
+	/// current weapon
+	/// </summary>
 	this->currentWeapon = LASER;
 
 	//upgrades
@@ -154,7 +169,7 @@ void Player::Movement()
 			this->currentVelocity.x += this->direction.x * this->acceleration;
 	}
 
-	//staliziler Force (it will make aircraft (0,0))
+	//stabilizier Force
 	//for X
 	if (this->currentVelocity.x > 0)
 	{
@@ -187,25 +202,35 @@ void Player::Movement()
 			this->currentVelocity.y = 0;
 	}
 
-	//final move
+	/// <summary>
+	/// final move
+	/// </summary>
 	this->sprite.move(this->currentVelocity.x, this->currentVelocity.y);
 
-	//player Center, because we need to center it after shoot
+	/// <summary>
+	/// player Center, because we need to center it after shoot
+	/// </summary>
 	this->playerCenter.x = this->sprite.getPosition().x +
 		this->sprite.getGlobalBounds().width / 2;
 	this->playerCenter.y = this->sprite.getPosition().y +
 		this->sprite.getGlobalBounds().height / 2;
 }
 
-//Accessories for player
+/// <summary>
+/// Accessories for player
+/// </summary>
 void Player::UpdateAccessories()
 {
-	//set position of gun to follow player 
+	/// <summary>
+	/// set position of gun to follow player 
+	/// </summary>
 	this->mainGunSprite.setPosition(
 		this->mainGunSprite.getPosition().x,
 		this->playerCenter.y);
 
-	//animation the main gun and correct after firing
+	/// <summary>
+	/// animation the main gun and correct after firing
+	/// </summary>
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 20.f)
 	{
 		this->mainGunSprite.move(2.f + this->currentVelocity.x, 0.f);
@@ -219,7 +244,6 @@ void Player::UpdateAccessories()
 	}
 }
 
-
 void Player::Combact()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::SHOOT]))
@@ -227,7 +251,9 @@ void Player::Combact()
 	{
 		if (this->currentWeapon == LASER)
 		{
-			//create bullet
+			/// <summary>
+			/// create bullet
+			/// </summary>
 			if (this->mainGunLevel == 0)
 			{
 				this->bullets.push_back(
@@ -245,7 +271,9 @@ void Player::Combact()
 			{
 
 			}
-			//animate gun
+			/// <summary>
+			/// animate gun
+			/// </summary>
 			this->mainGunSprite.move(-30.f, 0.f);
 		}
 		else if (this->currentWeapon == MISSILE1)
@@ -298,6 +326,8 @@ void Player::Update(sf::Vector2u windowBounds)
 
 void Player::Draw(sf::RenderTarget& target)
 {
+	//target.draw(this->aura);
+
 	//ordering in important, bullets draw beforing the player/sprite
 	for (size_t i = 0; i < this->bullets.size(); i++)
 	{
@@ -307,4 +337,5 @@ void Player::Draw(sf::RenderTarget& target)
 	target.draw(this->mainGunSprite);
 
 	target.draw(this->sprite);
+
 }
