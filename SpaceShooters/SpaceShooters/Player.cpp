@@ -11,55 +11,42 @@ Player::Player(std::vector<sf::Texture>& textures,
 	int LEFT, int RIGHT,
 	int SHOOT)
 	:level(1)
-	, exp(0) //experience, for future implementation. if experience level ++, level increases
+	, exp(0) //experience, for future implementation. if kill enemy, experience level ++, level increases
 	, expNext(100) /////
 	, hp(10)
 	, hpMax(10)
 	, damage(1)
-	, damageMax(2)
+	, damageMax(3)
 	, score(0)
 
 {
-	/// <summary>
 	/// update positions
-	/// player Center
-	/// </summary>
+	/// player Center (player central point)
 	this->playerCenter.x = this->sprite.getPosition().x +
 		this->sprite.getGlobalBounds().width / 2;
 	this->playerCenter.y = this->sprite.getPosition().y +
 		this->sprite.getGlobalBounds().height / 2;
 
-	/// <summary>
-	/// ship (player)
-	/// </summary>
-	this->sprite.setTexture(textures[0]);
-	this->sprite.setScale(0.13f, 0.13f);
 
-	/// <summary>
+	/// player
+	this->sprite.setTexture(textures[0]);
+	this->sprite.setScale(0.20f, 0.20f);
+
+
 	/// bullet & missile
-	/// </summary>
 	this->laserTexture = &textures[1];
 	this->missile1Texture = &textures[2];
 	//this->missile2Texture = &textures[1];
 
-	//enemy
-
-	/// <summary>
 	/// Gun
-	/// </summary>
 	this->mainGunSprite.setTexture(textures[3]);
+
+	//Gun position Center (same as player center point)
 	this->mainGunSprite.setOrigin(
 		this->mainGunSprite.getGlobalBounds().width / 2,
 		this->mainGunSprite.getGlobalBounds().height / 2);
-	this->mainGunSprite.rotate(90);
 
-	this->mainGunSprite.setPosition(
-		this->playerCenter.x + 20.f,
-		this->playerCenter.y);
-
-	/// <summary>
 	/// timing for shoot
-	/// </summary>
 	this->shootTimerMax = 25;
 	this->shootTimer = this->shootTimerMax;
 	this->damageTimer = 10;
@@ -72,18 +59,15 @@ Player::Player(std::vector<sf::Texture>& textures,
 	this->controls[controls::RIGHT] = RIGHT;
 	this->controls[controls::SHOOT] = SHOOT;
 
-	/// <summary>
 	/// maxspeed, accelaration, force
-	/// </summary>
 	this->maxVelocity = 20.f;
 	this->acceleration = 1.f;
 	this->stabilizerForce = 0.3f;
 
 	//aura
 
-	/// <summary>
+
 	/// current weapon
-	/// </summary>
 	this->currentWeapon = LASER;
 
 	//upgrades
@@ -107,7 +91,7 @@ int Player::getdamage() const
 	switch (this->currentWeapon)
 	{
 	case LASER:
-		damage = rand() % this->damageMax + this->damage;
+		damage = rand() % this->damageMax + this->damage; //damageMax is 3, so random from 1-3
 		break;
 
 	case MISSILE1:
@@ -202,40 +186,33 @@ void Player::Movement()
 			this->currentVelocity.y = 0;
 	}
 
-	/// <summary>
 	/// final move
-	/// </summary>
 	this->sprite.move(this->currentVelocity.x, this->currentVelocity.y);
 
-	/// <summary>
+
 	/// player Center, because we need to center it after shoot
-	/// </summary>
 	this->playerCenter.x = this->sprite.getPosition().x +
 		this->sprite.getGlobalBounds().width / 2;
 	this->playerCenter.y = this->sprite.getPosition().y +
 		this->sprite.getGlobalBounds().height / 2;
 }
 
-/// <summary>
+
 /// Accessories for player
-/// </summary>
 void Player::UpdateAccessories()
 {
-	/// <summary>
+
 	/// set position of gun to follow player 
-	/// </summary>
 	this->mainGunSprite.setPosition(
 		this->mainGunSprite.getPosition().x,
 		this->playerCenter.y);
 
-	/// <summary>
-	/// animation the main gun and correct after firing
-	/// </summary>
+	/// animation the main gun and correct after firing (shoot)
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 20.f)
 	{
 		this->mainGunSprite.move(2.f + this->currentVelocity.x, 0.f);
 	}
-
+	//correction
 	if (this->mainGunSprite.getPosition().x > this->playerCenter.x + 20.f)
 	{
 		this->mainGunSprite.setPosition(
@@ -251,17 +228,16 @@ void Player::Combact()
 	{
 		if (this->currentWeapon == LASER)
 		{
-			/// <summary>
 			/// create bullet
-			/// </summary>
 			if (this->mainGunLevel == 0)
 			{
 				this->bullets.push_back(
 					Bullet(laserTexture,
-						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y),
-						sf::Vector2f(0.2f, 0.2f),
-						sf::Vector2f(1.0f, 0.f),
+						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y), //position
+						sf::Vector2f(0.2f, 0.2f), //scale
+						sf::Vector2f(1.0f, 0.f), //direction
 						10.f, 40.f, 2.f));
+				//initialVelocity, MaxVelocity, Accelaration
 			}
 			else if (this->mainGunLevel == 1)
 			{
@@ -271,31 +247,31 @@ void Player::Combact()
 			{
 
 			}
-			/// <summary>
-			/// animate gun
-			/// </summary>
+
+			/// animate gun	(while fire)
 			this->mainGunSprite.move(-30.f, 0.f);
 		}
 		else if (this->currentWeapon == MISSILE1)
 		{
-			//create bullet 1 
+			//create missile 1 
 			this->bullets.push_back(
 				Bullet(missile1Texture,
-					sf::Vector2f(this->playerCenter.x, this->playerCenter.y - 25.f),
-					sf::Vector2f(0.05f, 0.05f),
-					sf::Vector2f(1.f, 0.f),
-					2.f, 40.f, 1.f));
+					sf::Vector2f(this->playerCenter.x, this->playerCenter.y - 40.f),   //position
+					sf::Vector2f(0.06f, 0.06f),  //scale
+					sf::Vector2f(1.f, 0.f),		//direction
+					2.f, 40.f, 1.f));			//initialVelocity, MaxVelocity, Accelaration
 
 			if (this->dualMissile1)
 			{
-				//create bullet 2 
+				//create missile 1 
 				this->bullets.push_back(
 					Bullet(missile1Texture,
-						sf::Vector2f(this->playerCenter.x, this->playerCenter.y + 25.f),
-						sf::Vector2f(0.05f, 0.05f),
+						sf::Vector2f(this->playerCenter.x, this->playerCenter.y + 40.f),
+						sf::Vector2f(0.06f, 0.06f),
 						sf::Vector2f(1.f, 0.f),
 						2.f, 40.f, 1.f));
 			}
+			this->mainGunSprite.move(-30.f, 0.f);
 		}
 		else if (this->currentWeapon == MISSILE2)
 		{
@@ -317,7 +293,6 @@ void Player::Update(sf::Vector2u windowBounds)
 
 	if (this->damageTimer < this->damageTimerMax)
 		this->damageTimer++;
-
 
 	this->Movement();
 	this->UpdateAccessories();

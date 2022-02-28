@@ -8,33 +8,30 @@ class Game
 private:
 	sf::RenderWindow* window;
 
-	/// <summary>
-	/// Text
-	/// </summary>
+	/// Text player
 	sf::Font font;
-	sf::Text followPlayerTexts;
-	//sf::Text staticPlayerTexts;
-	sf::Text enemyText;
+	sf::Text followPlayerTexts; //(health)
+
+	//Text enemy
+	sf::Text enemyText; //(health)
+
+	//Text Gameover
 	sf::Text gameOverText;
 
-	/// <summary>
-	/// Players
-	/// </summary>
+
+	/// Players class
 	std::vector<Player> players;
 	int playersAlive;
 
-	//textTags
+	//textTags class
 	std::vector<TextTag> textTags;
 
-	/// <summary>
+
 	/// Textures
-	/// </summary>
 	std::vector<sf::Texture> textures;
 	sf::Texture auraTextures;
 
-	/// <summary>
-	/// Enemies
-	/// </summary>
+	/// Enemie class
 	std::vector<Enemy> enemies;
 	std::vector<Enemy> enemiesSaved;
 
@@ -45,17 +42,15 @@ public:
 	Game(sf::RenderWindow* window);
 	virtual ~Game();
 
-	/// <summary>
+
 	/// Accessors
-	/// </summary>
-	/// <returns></returns>
-	inline		sf::RenderWindow& getWindow() { return *this->window; } //de-reference //it will not create seperate memory, it willl just copy code directly to calling function.
+	inline	sf::RenderWindow& getWindow() { return *this->window; }
+	//de-reference //it will not create seperate memory, it will just copy code directly to calling function.
 
 	//Setters
 
-	/// <summary>
+
 	/// Functions
-	/// </summary>
 	void		InitUI();
 	void		UpdateUIPlayer(int index);
 	void		UpdateUIEnemy(int index);

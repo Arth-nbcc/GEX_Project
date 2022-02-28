@@ -1,11 +1,11 @@
 #include "Enemy.h"
 
-enum eTypes { MOVELEFT = 0, FOLLOW, FOLLOWFAST, FOLLOWSLOW, FOLLOWSHOOT, FOLLOWFASTSHOOT };
+enum eTypes { MOVELEFT = 0, FOLLOW, FOLLOWFAST, FOLLOWSLOW, FOLLOWSHOOT };
 
 Enemy::Enemy(sf::Texture* texture, sf::Vector2u windowBounds,
-	sf::Vector2f position, sf::Vector2f direction,
-	sf::Vector2f scale, int type,
-	int hpMax, int damageMax, int damageMin)
+	sf::Vector2f direction, sf::Vector2f scale,
+	int type, int hpMax,
+	int damageMax, int damageMin)
 {
 	this->texture = texture;
 	this->sprite.setTexture(*this->texture);
@@ -14,6 +14,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u windowBounds,
 
 	this->direction = direction;
 
+	//position sets to randomly at Y cordinate 
 	this->sprite.setPosition(this->windowBounds.x, (rand() % this->windowBounds.y) - this->sprite.getGlobalBounds().height);
 
 	this->type = type;
@@ -35,10 +36,8 @@ Enemy::~Enemy()
 void Enemy::takeDamage(int damage)
 {
 	this->hp -= damage;
-	/// <summary>
+
 	/// reset 
-	/// </summary>
-	/// <param name="damage"></param>
 	this->damageTimer = this->damageTimerMax;
 
 	if (this->hp <= 0)
@@ -52,7 +51,7 @@ void Enemy::Update()
 	switch (this->type)
 	{
 	case MOVELEFT:
-		this->sprite.move(this->direction.x * 10.f, this->direction.y * 10.f);
+		this->sprite.move(this->direction.x * 10.f, this->direction.y);
 		break;
 
 	default:
@@ -62,13 +61,11 @@ void Enemy::Update()
 	if (this->damageTimer > 0.f)
 	{
 		this->damageTimer -= 1.f;
-		///
+
 		///while hitted, set color red
-		/// 
 		this->sprite.setColor(sf::Color::Red);
-		/// <summary>
+
 		/// //if hitted, moves little backwards
-		/// </summary>
 		this->sprite.move(5.f, 0.f);
 	}
 	else

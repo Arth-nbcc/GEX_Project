@@ -24,15 +24,13 @@ public:
 
 	virtual ~Bullet();
 
-	///
+
 	///Accessors
-	///
 	inline sf::FloatRect getGlobalBounds() const { return this->sprite.getGlobalBounds(); }
 	inline sf::Vector2f getPosition() const { return this->sprite.getPosition(); }
 
-	///
+
 	///functions
-	/// 
 	void  Movement();
 
 	void  Update();

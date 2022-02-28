@@ -1,6 +1,2 @@
-﻿  Game.cpp
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(37,29): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(46,43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(275,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(288,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  Player.cpp
   SpaceShooters.vcxproj -> D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\x64\Debug\SpaceShooters.exe
