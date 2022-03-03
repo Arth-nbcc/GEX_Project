@@ -6,7 +6,9 @@ int main()
 	/// Window
 	/// </summary>
 	sf::RenderWindow window(sf::VideoMode(1720, 880), "Space-Shooters", sf::Style::Default);
-	window.setFramerateLimit(65);
+
+	sf::Clock clock;
+	float dt = 0.f;
 
 	Game game(&window);
 
@@ -24,9 +26,14 @@ int main()
 				window.close();
 		}
 
-		game.update();
+		//for printing the dt of laptop
+		dt = clock.restart().asSeconds();
+		//std::cout << dt << "\n";
+
+		game.update(dt);
 		game.draw();
 	}
 
 	return 0;
 }
+//this computer dt is 0.016

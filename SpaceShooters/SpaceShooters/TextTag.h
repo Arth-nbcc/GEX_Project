@@ -9,6 +9,8 @@
 class TextTag
 {
 private:
+	float dtMultiplier;
+
 	sf::Font* font;
 	sf::Text  text;
 
@@ -30,7 +32,7 @@ public:
 	inline const float& getTimer()const { return this->timer; }
 
 	//functiuons
-	void Update();
+	void Update(const float& dt);
 	void Draw(sf::RenderTarget& target);
 };
 

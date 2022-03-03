@@ -3,6 +3,8 @@
 class Player
 {
 private:
+	float dtMultiplier;
+
 	int playerNr;
 
 	sf::Vector2f playerCenter;
@@ -49,10 +51,10 @@ private:
 	bool	dualMissile1;
 	bool	dualMissile2;
 
-	int shootTimer;
-	int shootTimerMax;
-	int damageTimer;
-	int damageTimerMax;
+	float shootTimer;
+	float shootTimerMax;
+	float damageTimer;
+	float damageTimerMax;
 
 public:
 	Player(std::vector<sf::Texture>& textures,
@@ -77,10 +79,10 @@ public:
 
 
 	/// functions
-	void	UpdateAccessories();
-	void	Combact();
-	void	Movement(); //for keyboard
-	void	Update(sf::Vector2u windowBounds);
+	void	UpdateAccessories(const float& dt);
+	void	Combact(const float& dt);
+	void	Movement(const float& dt); //for keyboard
+	void	Update(sf::Vector2u windowBounds, const float& dt);
 	void	Draw(sf::RenderTarget& target);
 
 	/// Statics

@@ -6,7 +6,8 @@ enum textures { player = 0, laser1, missile1, mainGun1, enemy1 };
 Game::Game(sf::RenderWindow* window)
 {
 	this->window = window;
-	this->window->setFramerateLimit(65);
+	//this->window->setFramerateLimit(60);
+	this->dtMultiplier = 60.f;
 
 	/// init fonts
 	this->font.loadFromFile("Fonts/Dosis-Light.ttf");
@@ -72,13 +73,13 @@ void Game::initTextures()
 
 }
 
-void Game::update()
+void Game::update(const float& dt)
 {
 	if (this->players.size() > 0)
 	{
 		/// update timer
 		if (this->enemySpawnTimer < this->enemySpawnTimerMax)
-			this->enemySpawnTimer++;
+			this->enemySpawnTimer += 1.f * dt * this->dtMultiplier;
 
 		/// spawn enemies
 		if (this->enemySpawnTimer >= this->enemySpawnTimerMax)
@@ -104,13 +105,13 @@ void Game::update()
 			{
 
 				/// UPDATE PLAYERS
-				this->players[i].Update(this->window->getSize());
+				this->players[i].Update(this->window->getSize(), dt);
 
 
 				/// Bullets update
 				for (size_t k = 0; k < this->players[i].getBullets().size(); k++)
 				{
-					this->players[i].getBullets()[k].Update();
+					this->players[i].getBullets()[k].Update(dt);
 
 					/// Enemy collision check with bullets		
 					for (size_t j = 0; j < this->enemies.size(); j++)
@@ -130,13 +131,13 @@ void Game::update()
 								//textTags
 								this->textTags.push_back(
 									TextTag(
-										&this->font,
-										"-" + std::to_string(damage),
-										sf::Color::Red,
-										sf::Vector2f(
+										&this->font,					//font
+										"-" + std::to_string(damage),	//Text
+										sf::Color::Red,					//color
+										sf::Vector2f(					//position
 											this->enemies[j].getPosition().x + 20.f,
 											this->enemies[j].getPosition().y - 20.f),
-										30, 20.f));
+										30, 20.f));						//size & timer
 							}
 
 							/// enemy dead						
@@ -161,7 +162,7 @@ void Game::update()
 		/// player-enemy collision
 		for (size_t i = 0; i < this->enemies.size(); i++)
 		{
-			this->enemies[i].Update();
+			this->enemies[i].Update(dt);
 
 			for (size_t k = 0; k < this->players.size(); k++)
 			{
@@ -203,7 +204,7 @@ void Game::update()
 		//update TextTags
 		for (size_t i = 0; i < this->textTags.size(); i++)
 		{
-			this->textTags[i].Update();
+			this->textTags[i].Update(dt);
 
 			if (this->textTags[i].getTimer() <= 0.f)
 			{

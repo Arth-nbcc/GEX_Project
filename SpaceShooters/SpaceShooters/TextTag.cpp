@@ -3,6 +3,9 @@
 TextTag::TextTag(sf::Font* font, std::string text, sf::Color color,
 	sf::Vector2f position, unsigned int size, float timerMax)
 {
+	//dt
+	this->dtMultiplier = 60.f;
+
 	//text 
 	this->text.setFont(*font);
 	this->text.setCharacterSize(size);
@@ -25,16 +28,16 @@ TextTag::~TextTag()
 {
 }
 
-void TextTag::Update()
+void TextTag::Update(const float& dt)
 {
 	//update timer
 	if (this->timer > 0.f)
 	{
-		this->timer -= 1.f;
+		this->timer -= 1.f * dt * dtMultiplier;
 
 		this->text.move(
-			this->direction.x * this->speed,
-			this->direction.y * this->speed);
+			this->direction.x * this->speed * dt * dtMultiplier,
+			this->direction.y * this->speed * dt * dtMultiplier);
 	}
 	else
 	{

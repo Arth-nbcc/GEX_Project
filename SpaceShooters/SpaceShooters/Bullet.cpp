@@ -5,6 +5,8 @@ Bullet::Bullet(sf::Texture* texture,
 	sf::Vector2f direction, float initialVelocity,
 	float maxVelocity, float acceleration)
 {
+	this->dtMultiplier = 60.f;
+
 	this->texture = texture;
 	this->sprite.setTexture(*this->texture);
 	this->maxVelocity = maxVelocity;
@@ -26,19 +28,19 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::Movement()
+void Bullet::Movement(const float& dt)
 {
 	if (this->acceleration > 0.f)
 	{
 		if (this->currentVelocity.x < this->maxVelocity)
 
 			///accelerate in the pressed direction, velocity increasing by acceleration and multiply by direction
-			this->currentVelocity.x += this->acceleration * this->direction.x;
+			this->currentVelocity.x += this->acceleration * this->direction.x * dt * this->dtMultiplier;
 
 		if (this->currentVelocity.y < this->maxVelocity)
 
 			///accelarate in the pressed direction, valocity increasing by accelaration and multiply by direction			
-			this->currentVelocity.y += this->acceleration * this->direction.y;
+			this->currentVelocity.y += this->acceleration * this->direction.y * dt * this->dtMultiplier;
 	}
 	else
 	{
@@ -47,12 +49,12 @@ void Bullet::Movement()
 			this->maxVelocity * this->direction.y);
 	}
 
-	this->sprite.move(this->currentVelocity);
+	this->sprite.move(this->currentVelocity * dt * this->dtMultiplier);
 }
 
-void Bullet::Update()
+void Bullet::Update(const float& dt)
 {
-	this->Movement();
+	this->Movement(dt);
 }
 
 void Bullet::Draw(sf::RenderTarget& target)

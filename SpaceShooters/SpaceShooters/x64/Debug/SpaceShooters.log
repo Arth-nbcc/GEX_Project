@@ -1,2 +1,18 @@
-﻿  Player.cpp
+﻿  Enemy.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(39,49): warning C4244: 'return': conversion from 'const float' to 'const int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(20,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(27,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(28,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(39,49): warning C4244: 'return': conversion from 'const float' to 'const int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(43,43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(252,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(263,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Main.cpp
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(39,49): warning C4244: 'return': conversion from 'const float' to 'const int', possible loss of data
+  Generating Code...
   SpaceShooters.vcxproj -> D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\x64\Debug\SpaceShooters.exe

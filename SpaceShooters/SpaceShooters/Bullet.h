@@ -8,6 +8,8 @@
 class Bullet
 {
 private:
+	float dtMultiplier;
+
 	sf::Texture* texture;
 	sf::Sprite   sprite;
 
@@ -31,9 +33,9 @@ public:
 
 
 	///functions
-	void  Movement();
+	void  Movement(const float& dt);
 
-	void  Update();
+	void  Update(const float& dt);
 	void  Draw(sf::RenderTarget& target);
 };
 

@@ -7,6 +7,8 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u windowBounds,
 	int type, int hpMax,
 	int damageMax, int damageMin)
 {
+	this->dtMultiplier = 60.f;
+
 	this->texture = texture;
 	this->sprite.setTexture(*this->texture);
 	this->sprite.setScale(scale);
@@ -46,12 +48,14 @@ void Enemy::takeDamage(int damage)
 	}
 }
 
-void Enemy::Update()
+void Enemy::Update(const float& dt)
 {
 	switch (this->type)
 	{
 	case MOVELEFT:
-		this->sprite.move(this->direction.x * 10.f, this->direction.y);
+		this->sprite.move(
+			this->direction.x * 10.f * dt * this->dtMultiplier,
+			this->direction.y);
 		break;
 
 	default:
@@ -60,13 +64,14 @@ void Enemy::Update()
 
 	if (this->damageTimer > 0.f)
 	{
-		this->damageTimer -= 1.f;
+		this->damageTimer -= 1.f * dt * dtMultiplier;
 
 		///while hitted, set color red
 		this->sprite.setColor(sf::Color::Red);
 
 		/// //if hitted, moves little backwards
-		this->sprite.move(5.f, 0.f);
+		this->sprite.move(7.f * dt * dtMultiplier, 0.f);
+
 	}
 	else
 		this->sprite.setColor(sf::Color::White);

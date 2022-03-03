@@ -14,14 +14,16 @@ private:
 	sf::Vector2u windowBounds;
 	sf::Vector2f direction;
 
+	float dtMultiplier;
+
 	float damageTimer;
 	float damageTimerMax;
 
 	int		type;
 	int		hp;
 	int		hpMax;
-	int		damageMin;
-	int		damageMax;
+	float	damageMin;
+	float	damageMax;
 
 public:
 	Enemy(sf::Texture* texture, sf::Vector2u windowBounds,
@@ -45,7 +47,7 @@ public:
 	///functions
 	/// 
 	void	takeDamage(int damage);
-	void	Update();
+	void	Update(const float& dt);
 	void	Draw(sf::RenderTarget& target);
 
 };

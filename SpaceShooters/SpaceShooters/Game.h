@@ -7,6 +7,7 @@ class Game
 {
 private:
 	sf::RenderWindow* window;
+	float dtMultiplier;
 
 	/// Text player
 	sf::Font font;
@@ -35,8 +36,8 @@ private:
 	std::vector<Enemy> enemies;
 	std::vector<Enemy> enemiesSaved;
 
-	int		enemySpawnTimer;
-	int		enemySpawnTimerMax;
+	float		enemySpawnTimer;
+	float		enemySpawnTimerMax;
 
 public:
 	Game(sf::RenderWindow* window);
@@ -54,7 +55,7 @@ public:
 	void		InitUI();
 	void		UpdateUIPlayer(int index);
 	void		UpdateUIEnemy(int index);
-	void		update();
+	void		update(const float& dt);
 	void		draw();
 	void		DrawUI();
 	void		initTextures();

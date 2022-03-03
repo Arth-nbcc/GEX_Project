@@ -20,6 +20,9 @@ Player::Player(std::vector<sf::Texture>& textures,
 	, score(0)
 
 {
+	//dt
+	this->dtMultiplier = 60.f;
+
 	/// update positions
 	/// player Center (player central point)
 	this->playerCenter.x = this->sprite.getPosition().x +
@@ -47,9 +50,9 @@ Player::Player(std::vector<sf::Texture>& textures,
 		this->mainGunSprite.getGlobalBounds().height / 2);
 
 	/// timing for shoot
-	this->shootTimerMax = 25;
+	this->shootTimerMax = 25.f;
 	this->shootTimer = this->shootTimerMax;
-	this->damageTimer = 10;
+	this->damageTimer = 10.f;
 	this->damageTimerMax = this->damageTimerMax;
 
 	//controls
@@ -91,7 +94,7 @@ int Player::getdamage() const
 	switch (this->currentWeapon)
 	{
 	case LASER:
-		damage = rand() % this->damageMax + this->damage; //damageMax is 3, so random from 1-3
+		damage = rand() % this->damageMax + this->damage; //damageMax is 3
 		break;
 
 	case MISSILE1:
@@ -111,7 +114,7 @@ int Player::getdamage() const
 	return damage;
 }
 
-void Player::Movement()
+void Player::Movement(const float& dt)
 {
 	//UP
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::UP])))
@@ -120,7 +123,8 @@ void Player::Movement()
 		this->direction.y = -1.f;
 
 		if (this->currentVelocity.y > -this->maxVelocity && this->direction.y < 0)
-			this->currentVelocity.y += this->direction.y * this->acceleration;
+			this->currentVelocity.y += this->direction.y * this->acceleration
+			* dt * this->dtMultiplier;
 	}
 
 	//DOWN
@@ -130,7 +134,8 @@ void Player::Movement()
 		this->direction.y = 1.f;
 
 		if (this->currentVelocity.y < this->maxVelocity && this->direction.y > 0)
-			this->currentVelocity.y += this->direction.y * this->acceleration;
+			this->currentVelocity.y += this->direction.y * this->acceleration
+			* dt * this->dtMultiplier;
 	}
 
 	//LEFT
@@ -140,7 +145,8 @@ void Player::Movement()
 		this->direction.y = 0.f;
 
 		if (this->currentVelocity.x > -this->maxVelocity && this->direction.x < 0)
-			this->currentVelocity.x += this->direction.x * this->acceleration;
+			this->currentVelocity.x += this->direction.x * this->acceleration
+			* dt * this->dtMultiplier;
 	}
 
 	//RIGHT
@@ -150,21 +156,24 @@ void Player::Movement()
 		this->direction.y = 0.f;
 
 		if (this->currentVelocity.x < this->maxVelocity && this->direction.x > 0)
-			this->currentVelocity.x += this->direction.x * this->acceleration;
+			this->currentVelocity.x += this->direction.x * this->acceleration
+			* dt * this->dtMultiplier;
 	}
 
 	//stabilizier Force
 	//for X
 	if (this->currentVelocity.x > 0)
 	{
-		this->currentVelocity.x -= this->stabilizerForce;
+		this->currentVelocity.x -= this->stabilizerForce
+			* dt * this->dtMultiplier;
 
 		if (this->currentVelocity.x < 0)
 			this->currentVelocity.x = 0;
 	}
 	else if (this->currentVelocity.x < 0)
 	{
-		this->currentVelocity.x += this->stabilizerForce;
+		this->currentVelocity.x += this->stabilizerForce
+			* dt * this->dtMultiplier;
 
 		if (this->currentVelocity.x > 0)
 			this->currentVelocity.x = 0;
@@ -173,21 +182,25 @@ void Player::Movement()
 	//for Y
 	if (this->currentVelocity.y > 0)
 	{
-		this->currentVelocity.y -= this->stabilizerForce;
+		this->currentVelocity.y -= this->stabilizerForce
+			* dt * this->dtMultiplier;
 
 		if (this->currentVelocity.y < 0)
 			this->currentVelocity.y = 0;
 	}
 	else if (this->currentVelocity.y < 0)
 	{
-		this->currentVelocity.y += this->stabilizerForce;
+		this->currentVelocity.y += this->stabilizerForce
+			* dt * this->dtMultiplier;
 
 		if (this->currentVelocity.y > 0)
 			this->currentVelocity.y = 0;
 	}
 
 	/// final move
-	this->sprite.move(this->currentVelocity.x, this->currentVelocity.y);
+	this->sprite.move(
+		this->currentVelocity.x * dt * this->dtMultiplier,
+		this->currentVelocity.y * dt * this->dtMultiplier);
 
 
 	/// player Center, because we need to center it after shoot
@@ -199,9 +212,8 @@ void Player::Movement()
 
 
 /// Accessories for player
-void Player::UpdateAccessories()
+void Player::UpdateAccessories(const float& dt)
 {
-
 	/// set position of gun to follow player 
 	this->mainGunSprite.setPosition(
 		this->mainGunSprite.getPosition().x,
@@ -210,7 +222,9 @@ void Player::UpdateAccessories()
 	/// animation the main gun and correct after firing (shoot)
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 20.f)
 	{
-		this->mainGunSprite.move(2.f + this->currentVelocity.x, 0.f);
+		this->mainGunSprite.move(
+			2.f * dt * this->dtMultiplier + this->currentVelocity.x * dt * this->dtMultiplier,
+			0.f);
 	}
 	//correction
 	if (this->mainGunSprite.getPosition().x > this->playerCenter.x + 20.f)
@@ -221,7 +235,7 @@ void Player::UpdateAccessories()
 	}
 }
 
-void Player::Combact()
+void Player::Combact(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::SHOOT]))
 		&& this->shootTimer >= shootTimerMax)
@@ -285,25 +299,25 @@ void Player::Combact()
 	}
 }
 
-void Player::Update(sf::Vector2u windowBounds)
+void Player::Update(sf::Vector2u windowBounds, const float& dt)
 {
 	//update timers
 	if (this->shootTimer < this->shootTimerMax)
-		this->shootTimer++;
+		this->shootTimer += 1 * dt * this->dtMultiplier;
 
 	if (this->damageTimer < this->damageTimerMax)
-		this->damageTimer++;
+		this->damageTimer += 1 * dt * this->dtMultiplier;
 
-	this->Movement();
-	this->UpdateAccessories();
-	this->Combact();
+	this->Movement(dt);
+	this->UpdateAccessories(dt);
+	this->Combact(dt);
 }
 
 void Player::Draw(sf::RenderTarget& target)
 {
 	//target.draw(this->aura);
 
-	//ordering in important, bullets draw beforing the player/sprite
+	//ordering is important, bullets draw beforing the player/sprite
 	for (size_t i = 0; i < this->bullets.size(); i++)
 	{
 		this->bullets[i].Draw(target);
