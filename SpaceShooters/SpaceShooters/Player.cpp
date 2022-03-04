@@ -114,7 +114,7 @@ int Player::getdamage() const
 	return damage;
 }
 
-void Player::Movement(const float& dt)
+void Player::Movement(const float& dt, sf::Vector2u windowBounds)
 {
 	//UP
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::UP])))
@@ -208,6 +208,30 @@ void Player::Movement(const float& dt)
 		this->sprite.getGlobalBounds().width / 2;
 	this->playerCenter.y = this->sprite.getPosition().y +
 		this->sprite.getGlobalBounds().height / 2;
+
+	//window collision (player should not go out of the window)
+	//left
+	if (this->getPosition().x <= 0)
+	{
+		this->sprite.setPosition(0.f, this->sprite.getPosition().y);
+		this->currentVelocity.x = 0.f;
+	}
+
+	else if (this->getPosition().y <= 0)
+	{
+		this->sprite.setPosition(this->sprite.getPosition().x, 0.f);
+		this->currentVelocity.y = 0.f;
+	}
+	else if (this->getPosition().x + this->getGlobalBounds().width >= windowBounds.x)
+	{
+		this->sprite.setPosition(windowBounds.x - this->getGlobalBounds().width, this->sprite.getPosition().y);
+		this->currentVelocity.x = 0.f;
+	}
+	else if (this->getPosition().y + this->getGlobalBounds().height >= windowBounds.y)
+	{
+		this->sprite.setPosition(this->sprite.getPosition().x, windowBounds.y - this->sprite.getGlobalBounds().height);
+		this->currentVelocity.y = 0.f;
+	}
 }
 
 
@@ -220,7 +244,7 @@ void Player::UpdateAccessories(const float& dt)
 		this->playerCenter.y);
 
 	/// animation the main gun and correct after firing (shoot)
-	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 20.f)
+	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 15.f)
 	{
 		this->mainGunSprite.move(
 			2.f * dt * this->dtMultiplier + this->currentVelocity.x * dt * this->dtMultiplier,
@@ -308,7 +332,8 @@ void Player::Update(sf::Vector2u windowBounds, const float& dt)
 	if (this->damageTimer < this->damageTimerMax)
 		this->damageTimer += 1 * dt * this->dtMultiplier;
 
-	this->Movement(dt);
+
+	this->Movement(dt, windowBounds);
 	this->UpdateAccessories(dt);
 	this->Combact(dt);
 }

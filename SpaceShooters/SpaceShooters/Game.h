@@ -9,6 +9,9 @@ private:
 	sf::RenderWindow* window;
 	float dtMultiplier;
 
+	unsigned score;
+	unsigned scoreMultiplier;
+
 	/// Text player
 	sf::Font font;
 	sf::Text followPlayerTexts; //(health)
@@ -18,6 +21,9 @@ private:
 
 	//Text Gameover
 	sf::Text gameOverText;
+
+	//score
+	sf::Text scoreText;
 
 
 	/// Players class

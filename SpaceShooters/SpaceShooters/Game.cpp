@@ -15,6 +15,10 @@ Game::Game(sf::RenderWindow* window)
 	/// init Textures
 	this->initTextures();
 
+	//score
+	this->scoreMultiplier = 1;
+	this->score = 0;
+
 	/// init player
 	this->players.push_back(Player(this->textures));
 
@@ -142,9 +146,14 @@ void Game::update(const float& dt)
 
 							/// enemy dead						
 							if (this->enemies[j].getHP() <= 0)
+							{
+								//score
+								int score = this->enemies[j].getHPMax();
+								this->players[i].gainScore(score);
+
 								//std::cout << "ERase" << "\n";
 								this->enemies.erase(this->enemies.begin() + j);
-
+							}
 							return;	//RETURN!!!
 						}
 					}
@@ -157,6 +166,10 @@ void Game::update(const float& dt)
 					}
 				}
 			}
+			//Update Score
+			this->score = 0;
+			this->score += players[i].getScore();
+			this->scoreText.setString("Score: " + std::to_string(this->score));
 		}
 
 		/// player-enemy collision
@@ -266,18 +279,7 @@ void Game::draw()
 			this->window->draw(this->followPlayerTexts);
 		}
 	}
-
-	//Draw TextTags
-	for (size_t i = 0; i < textTags.size(); i++)
-	{
-		this->textTags[i].Draw(*this->window);
-	}
-
-	/// Game Over
-	if (this->playersAlive <= 0)
-	{
-		this->window->draw(this->gameOverText);
-	}
+	this->DrawUI();
 
 	this->window->display();
 }
@@ -301,11 +303,30 @@ void Game::InitUI()
 	this->gameOverText.setFillColor(sf::Color::Red);
 	this->gameOverText.setString("GAME OVER!");
 	this->gameOverText.setPosition(window->getSize().x / static_cast<float>(2) - 150.f, window->getSize().y / static_cast<float>(2));
+
+	//score Text
+	this->scoreText.setFont(this->font);
+	this->scoreText.setCharacterSize(32);
+	this->scoreText.setFillColor(sf::Color::White);
+	this->scoreText.setPosition(10.f, 10.f);
 }
 
 void Game::DrawUI()
 {
+	//Draw TextTags
+	for (size_t i = 0; i < textTags.size(); i++)
+	{
+		this->textTags[i].Draw(*this->window);
+	}
 
+	/// Game Over
+	if (this->playersAlive <= 0)
+	{
+		this->window->draw(this->gameOverText);
+	}
+
+	//Score Text
+	this->window->draw(this->scoreText);
 }
 
 

@@ -76,12 +76,13 @@ public:
 	inline const int& getHpMax()const { return this->hpMax; }
 	inline void takeDamage(int damage) { this->hp -= damage; }
 	inline bool isAlive()const { return this->hp > 0; }
-
+	inline void gainScore(int score) { this->score += score; }
+	inline const int getScore() const { return this->score; }
 
 	/// functions
 	void	UpdateAccessories(const float& dt);
 	void	Combact(const float& dt);
-	void	Movement(const float& dt); //for keyboard
+	void	Movement(const float& dt, sf::Vector2u windowBounds); //for keyboard
 	void	Update(sf::Vector2u windowBounds, const float& dt);
 	void	Draw(sf::RenderTarget& target);
 
