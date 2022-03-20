@@ -1,4 +1,5 @@
 #include"Bullet.h"
+#include "dArr.h"
 
 class Player
 {
@@ -16,7 +17,7 @@ private:
 	sf::Sprite	 mainGunSprite;
 
 	//Bullet class
-	std::vector<Bullet> bullets;
+	dArr<Bullet> bullets;
 
 	sf::Texture* missile1Texture;
 	sf::Texture* missile2Texture;
@@ -66,8 +67,9 @@ public:
 
 
 	/// Accessors
-	inline std::vector<Bullet>& getBullets() { return this->bullets; } //reference for bullets
-
+	Bullet& getBullets(unsigned index); //reference for bullets
+	void removeBullet(unsigned index);
+	inline const int getBulletsSize() const { return this->bullets.size(); }
 	inline const sf::Vector2f getPosition() const { return this->sprite.getPosition(); }
 	inline const sf::String getHpAsString()const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
 	int getdamage()const;

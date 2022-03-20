@@ -1,5 +1,6 @@
 #include "Bullet.h"
 
+
 Bullet::Bullet(sf::Texture* texture,
 	sf::Vector2f position, sf::Vector2f scale,
 	sf::Vector2f direction, float initialVelocity,

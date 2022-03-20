@@ -2,6 +2,7 @@
 #include"Player.h"
 #include "Enemy.h"
 #include "TextTag.h"
+#include "dArr.h"
 
 class Game
 {
@@ -27,19 +28,20 @@ private:
 
 
 	/// Players class
-	std::vector<Player> players;
+	dArr<Player> players;
 	int playersAlive;
 
 	//textTags class
-	std::vector<TextTag> textTags;
+	dArr<TextTag> textTags;
 
 
 	/// Textures
 	std::vector<sf::Texture> textures;
+	dArr<sf::Texture> enemyTextures;
 	sf::Texture auraTextures;
 
 	/// Enemie class
-	std::vector<Enemy> enemies;
+	dArr<Enemy> enemies;
 	std::vector<Enemy> enemiesSaved;
 
 	float		enemySpawnTimer;

@@ -13,8 +13,8 @@ Player::Player(std::vector<sf::Texture>& textures,
 	:level(1)
 	, exp(0) //experience, for future implementation. if kill enemy, experience level ++, level increases
 	, expNext(100) /////
-	, hp(10)
-	, hpMax(10)
+	, hp(20)
+	, hpMax(20)
 	, damage(1)
 	, damageMax(3)
 	, score(0)
@@ -229,7 +229,7 @@ void Player::Movement(const float& dt, sf::Vector2u windowBounds)
 	}
 	else if (this->getPosition().y + this->getGlobalBounds().height >= windowBounds.y)
 	{
-		this->sprite.setPosition(this->sprite.getPosition().x, windowBounds.y - this->sprite.getGlobalBounds().height);
+		this->sprite.setPosition(this->sprite.getPosition().x, windowBounds.y - this->getGlobalBounds().height);
 		this->currentVelocity.y = 0.f;
 	}
 }
@@ -269,7 +269,7 @@ void Player::Combact(const float& dt)
 			/// create bullet
 			if (this->mainGunLevel == 0)
 			{
-				this->bullets.push_back(
+				this->bullets.add(
 					Bullet(laserTexture,
 						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y), //position
 						sf::Vector2f(0.2f, 0.2f), //scale
@@ -292,7 +292,7 @@ void Player::Combact(const float& dt)
 		else if (this->currentWeapon == MISSILE1)
 		{
 			//create missile 1 
-			this->bullets.push_back(
+			this->bullets.add(
 				Bullet(missile1Texture,
 					sf::Vector2f(this->playerCenter.x, this->playerCenter.y - 40.f),   //position
 					sf::Vector2f(0.06f, 0.06f),  //scale
@@ -302,7 +302,7 @@ void Player::Combact(const float& dt)
 			if (this->dualMissile1)
 			{
 				//create missile 1 
-				this->bullets.push_back(
+				this->bullets.add(
 					Bullet(missile1Texture,
 						sf::Vector2f(this->playerCenter.x, this->playerCenter.y + 40.f),
 						sf::Vector2f(0.06f, 0.06f),
@@ -322,6 +322,25 @@ void Player::Combact(const float& dt)
 		this->shootTimer = 0; //RESET TIMER
 	}
 }
+
+Bullet& Player::getBullets(unsigned index)
+{
+	if (index<0 || index>this->bullets.size())
+		throw "out of bounds player::getBullet";
+
+
+	return this->bullets[index];
+
+}
+
+void Player::removeBullet(unsigned index)
+{
+	if (index<0 || index>this->bullets.size())
+		throw "out of bounds player::getBullet";
+
+	this->bullets.remove(index);
+}
+
 
 void Player::Update(sf::Vector2u windowBounds, const float& dt)
 {
