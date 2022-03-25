@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "TextTag.h"
 #include "dArr.h"
+#include "Pickup.h"
 
 class Game
 {
@@ -10,6 +11,12 @@ private:
 	sf::RenderWindow* window;
 	float dtMultiplier;
 
+	bool	 paused;
+	float	 keyTimerMax;
+	float	 keyTimer;
+
+	sf::Clock scoreTimer;
+	int		 scoreTime;
 	unsigned score;
 	unsigned scoreMultiplier;
 
@@ -26,6 +33,7 @@ private:
 	//score
 	sf::Text scoreText;
 
+	sf::Text controlsText;
 
 	/// Players class
 	dArr<Player> players;
@@ -34,10 +42,13 @@ private:
 	//textTags class
 	dArr<TextTag> textTags;
 
+	//pickups
+	dArr<Pickup> pickups;
 
 	/// Textures
 	std::vector<sf::Texture> textures;
 	dArr<sf::Texture> enemyTextures;
+	dArr<sf::Texture> pickupTextures;;
 	sf::Texture auraTextures;
 
 	/// Enemie class

@@ -62,11 +62,19 @@ void Game::initTextures()
 
 	sf::Texture temp;
 
+	//enemy
 	temp.loadFromFile("Textures/Ships/enemy2.png");
 	this->enemyTextures.add(sf::Texture(temp));
 	temp.loadFromFile("Textures/Ships/enemy1.png");
 	this->enemyTextures.add(sf::Texture(temp));
 
+	//pickup
+	temp.loadFromFile("Textures/Guns/hp.png");
+	this->pickupTextures.add(sf::Texture(temp));
+	temp.loadFromFile("Textures/Guns/missile+.png");
+	this->pickupTextures.add(sf::Texture(temp));
+	temp.loadFromFile("Textures/Guns/missile++.png");
+	this->pickupTextures.add(sf::Texture(temp));
 
 	//init aura textures
 
@@ -74,7 +82,33 @@ void Game::initTextures()
 
 void Game::update(const float& dt)
 {
-	if (this->players.size() > 0)
+	//Keytime update
+	if (this->keyTimer < this->keyTimerMax)
+		this->keyTimer += 1.f * dt * this->dtMultiplier;
+
+	//Pause Screen
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && this->keyTimer >= this->keyTimerMax)
+	{
+		if (this->paused)
+			this->paused = false;
+		else
+			this->paused = true;
+
+		this->keyTimer = 0.f;
+	}
+
+	//if (this->paused)
+	//{
+	//	for (size_t i = 0; i < this->players.size(); i++)
+	//	{
+	//		if (this->players[i].isAlive())
+	//		{
+	//			change Aura here	//TO-DO thing
+	//		}
+	//	}
+	//}
+
+	if (this->players.size() > 0 && !this->paused)
 	{
 		/// update timer
 		if (this->enemySpawnTimer < this->enemySpawnTimerMax)
@@ -145,6 +179,19 @@ void Game::update(const float& dt)
 								int score = this->enemies[j].getHPMax();
 								this->players[i].gainScore(score);
 
+								//add pickups
+								int pickupChance = rand() % 10;
+
+								if (pickupChance > 7)
+								{
+									this->pickups.add(Pickup(
+										&this->pickupTextures,	//texture
+										this->enemies[j].getPosition(),	//position
+										rand() % 3,		//type
+										150.f	//duration
+									));
+								}
+
 								//std::cout << "ERase" << "\n";
 								this->enemies.remove(j);
 							}
@@ -163,7 +210,8 @@ void Game::update(const float& dt)
 			//Update Score
 			this->score = 0;
 			this->score += players[i].getScore();
-			this->scoreText.setString("Score: " + std::to_string(this->score));
+			this->scoreText.setString(
+				"Score: " + std::to_string(this->score));
 		}
 
 		/// player-enemy collision
@@ -217,6 +265,49 @@ void Game::update(const float& dt)
 			{
 				this->textTags.remove(i);
 				break;
+			}
+		}
+
+		//update pickups
+		for (size_t i = 0; i < this->pickups.size(); i++)
+		{
+			this->pickups[i].Update(dt);
+
+			for (size_t k = 0; k < players.size(); k++)
+			{
+				if (this->pickups[i].checkCollision(this->players[k].getGlobalBounds()))
+				{
+					switch (this->pickups[i].getType())
+					{
+					case 0:		//HP
+						this->players[k].gainHP(this->players[k].getHpMax() / 5);
+						break;
+
+					case 1:		//Missile +
+						this->players[k].setGunLevel(1);
+						break;
+
+					case 2:		//Missile ++
+						this->players[k].setGunLevel(2);
+						break;
+
+					default:
+						//TO-DO thing HP
+						if (this->players[k].getHp() <= 8)
+						{
+							this->players[k].setGunLevel(0);
+						}
+						break;
+					}
+
+					this->pickups.remove(i);
+					break;
+				}
+				if (this->pickups[i].canDelete())
+				{
+					this->pickups.remove(i);
+					break;
+				}
 			}
 		}
 	}
@@ -273,6 +364,12 @@ void Game::draw()
 			this->window->draw(this->followPlayerTexts);
 		}
 	}
+
+	//pickups
+	for (size_t i = 0; i < pickups.size(); i++)
+	{
+		this->pickups[i].Draw(*window);
+	}
 	this->DrawUI();
 
 	this->window->display();
@@ -295,7 +392,10 @@ void Game::InitUI()
 	this->gameOverText.setFont(this->font);
 	this->gameOverText.setCharacterSize(60);
 	this->gameOverText.setFillColor(sf::Color::Red);
-	this->gameOverText.setString("GAME OVER!");
+	this->gameOverText.setString(
+		"GAME OVER!\nScore: " +
+		std::to_string(this->score) +
+		"\n\nPress ENTER to RESTART");
 	this->gameOverText.setPosition(window->getSize().x / static_cast<float>(2) - 150.f, window->getSize().y / static_cast<float>(2));
 
 	//score Text
@@ -317,7 +417,27 @@ void Game::DrawUI()
 	if (this->playersAlive <= 0)
 	{
 		this->window->draw(this->gameOverText);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		{
+			for (size_t i = 0; i < this->players.size(); i++)
+			{
+				this->players[i].Reset();
+			}
+
+			this->playersAlive = this->players.size();
+			this->score = 0;
+			this->enemySpawnTimerMax = 35.f;
+			this->scoreTime = 0;
+			this->scoreTimer.restart();
+			this->enemies.clear();
+			this->pickups.clear();
+		}
 	}
+
+	//Control Text
+	if (this->paused)
+		this->window->draw(this->controlsText);
 
 	//Score Text
 	this->window->draw(this->scoreText);

@@ -78,8 +78,10 @@ public:
 	inline const int& getHpMax()const { return this->hpMax; }
 	inline void takeDamage(int damage) { this->hp -= damage; }
 	inline bool isAlive()const { return this->hp > 0; }
+	void gainHP(int hp);
 	inline void gainScore(int score) { this->score += score; }
 	inline const int getScore() const { return this->score; }
+	void setGunLevel(int gunLevel);
 
 	/// functions
 	void	UpdateAccessories(const float& dt);
@@ -87,6 +89,7 @@ public:
 	void	Movement(const float& dt, sf::Vector2u windowBounds); //for keyboard
 	void	Update(sf::Vector2u windowBounds, const float& dt);
 	void	Draw(sf::RenderTarget& target);
+	void	Reset();
 
 	/// Statics
 	static	unsigned players;

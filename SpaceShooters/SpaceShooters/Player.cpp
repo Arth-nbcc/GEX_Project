@@ -235,6 +235,18 @@ void Player::Movement(const float& dt, sf::Vector2u windowBounds)
 }
 
 
+void Player::gainHP(int hp)
+{
+	this->hp += hp;
+	if (this->hp > this->hpMax)
+		this->hp = this->hpMax;
+}
+
+void Player::setGunLevel(int gunLevel)
+{
+	this->mainGunLevel = gunLevel;
+}
+
 /// Accessories for player
 void Player::UpdateAccessories(const float& dt)
 {
@@ -279,10 +291,44 @@ void Player::Combact(const float& dt)
 			}
 			else if (this->mainGunLevel == 1)
 			{
+				//2 bullets
+				this->bullets.add(
+					Bullet(laserTexture,
+						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y - 16.f), //position
+						sf::Vector2f(0.2f, 0.2f), //scale
+						sf::Vector2f(1.0f, 0.f), //direction
+						10.f, 40.f, 2.f));
 
+				this->bullets.add(
+					Bullet(laserTexture,
+						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y + 16.f), //position
+						sf::Vector2f(0.2f, 0.2f), //scale
+						sf::Vector2f(1.0f, 0.f), //direction
+						10.f, 40.f, 2.f));
 			}
 			else if (this->mainGunLevel == 2)
 			{
+				//3 bullets
+				this->bullets.add(
+					Bullet(laserTexture,
+						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y - 20.f), //position
+						sf::Vector2f(0.2f, 0.2f), //scale
+						sf::Vector2f(1.0f, 0.f), //direction
+						10.f, 40.f, 2.f));
+
+				this->bullets.add(
+					Bullet(laserTexture,
+						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y), //position
+						sf::Vector2f(0.2f, 0.2f), //scale
+						sf::Vector2f(1.0f, 0.f), //direction
+						10.f, 40.f, 2.f));
+
+				this->bullets.add(
+					Bullet(laserTexture,
+						sf::Vector2f(this->playerCenter.x + 50.f, this->playerCenter.y + 20.f), //position
+						sf::Vector2f(0.2f, 0.2f), //scale
+						sf::Vector2f(1.0f, 0.f), //direction
+						10.f, 40.f, 2.f));
 
 			}
 
@@ -371,4 +417,23 @@ void Player::Draw(sf::RenderTarget& target)
 
 	target.draw(this->sprite);
 
+}
+
+void Player::Reset()
+{
+	this->hpMax = 20;
+	this->hp = this->hpMax;
+	this->sprite.setPosition(sf::Vector2f(100.f, 100.f));
+	this->setGunLevel(0);
+	this->bullets.clear();
+	this->mainGunLevel = 0;
+	this->dualMissile1 = false;
+	this->dualMissile2 = false;
+	this->currentVelocity.x = 0;
+	this->currentVelocity.y = 0;
+	this->level = 1;
+	this->exp = 0;
+	this->currentWeapon = LASER;
+	this->shootTimer = this->shootTimerMax;
+	this->damageTimer = this->damageTimerMax;
 }
