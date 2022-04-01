@@ -12,8 +12,8 @@ private:
 	float dtMultiplier;
 
 	bool	 paused;
-	float	 keyTimerMax;
-	float	 keyTimer;
+	float	 keyTimeMax;
+	float	 keyTime;
 
 	sf::Clock scoreTimer;
 	int		 scoreTime;
@@ -51,6 +51,10 @@ private:
 	dArr<sf::Texture> pickupTextures;;
 	sf::Texture auraTextures;
 
+	//background
+	sf::Texture background;
+	sf::Sprite worldBackground;
+
 	/// Enemie class
 	dArr<Enemy> enemies;
 	std::vector<Enemy> enemiesSaved;
@@ -77,6 +81,7 @@ public:
 	void		update(const float& dt);
 	void		draw();
 	void		DrawUI();
+	void		backgroundDraw();
 	void		initTextures();
 };
 

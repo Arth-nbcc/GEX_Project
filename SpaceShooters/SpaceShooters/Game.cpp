@@ -15,6 +15,9 @@ Game::Game(sf::RenderWindow* window)
 	/// init Textures
 	this->initTextures();
 
+	//background
+	this->worldBackground.setTexture(this->background);
+
 	//score
 	this->scoreMultiplier = 1;
 	this->score = 0;
@@ -76,25 +79,30 @@ void Game::initTextures()
 	temp.loadFromFile("Textures/Guns/missile++.png");
 	this->pickupTextures.add(sf::Texture(temp));
 
+	//background
+	this->background.loadFromFile("Textures/Background/background1.jpg");
+
+
 	//init aura textures
 
 }
 
+
 void Game::update(const float& dt)
 {
 	//Keytime update
-	if (this->keyTimer < this->keyTimerMax)
-		this->keyTimer += 1.f * dt * this->dtMultiplier;
+	if (this->keyTime < this->keyTimeMax)
+		this->keyTime += 1.f * dt * this->dtMultiplier;
 
 	//Pause Screen
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && this->keyTimer >= this->keyTimerMax)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P) && this->keyTime >= this->keyTimeMax)
 	{
 		if (this->paused)
 			this->paused = false;
 		else
 			this->paused = true;
 
-		this->keyTimer = 0.f;
+		this->keyTime = 0.f;
 	}
 
 	//if (this->paused)
@@ -341,6 +349,9 @@ void Game::draw()
 {
 	this->window->clear();
 
+	//background
+	this->backgroundDraw();
+
 	/// enemy Draw
 	for (size_t i = 0; i < this->enemies.size(); i++)
 	{
@@ -375,6 +386,11 @@ void Game::draw()
 	this->window->display();
 }
 
+void Game::backgroundDraw()
+{
+	this->window->draw(this->worldBackground);
+}
+
 void Game::InitUI()
 {
 
@@ -403,6 +419,14 @@ void Game::InitUI()
 	this->scoreText.setCharacterSize(32);
 	this->scoreText.setFillColor(sf::Color::White);
 	this->scoreText.setPosition(10.f, 10.f);
+
+	//Control Texts
+	this->controlsText.setFont(this->font);
+	this->controlsText.setCharacterSize(40);
+	this->controlsText.setFillColor(sf::Color::Green);
+	this->controlsText.setString(
+		"A: LEFT\nD: RIGHT\nW: UP\nS: DOWN\nSPACE: SHOOT\nESC: QUIT");
+	this->controlsText.setPosition(40.f, 550.f);
 }
 
 void Game::DrawUI()
