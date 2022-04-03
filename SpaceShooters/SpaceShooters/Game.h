@@ -4,6 +4,7 @@
 #include "TextTag.h"
 #include "dArr.h"
 #include "Pickup.h"
+#include "SFML/Audio.hpp"
 
 class Game
 {
@@ -48,8 +49,10 @@ private:
 	/// Textures
 	std::vector<sf::Texture> textures;
 	dArr<sf::Texture> enemyTextures;
-	dArr<sf::Texture> pickupTextures;;
-	sf::Texture auraTextures;
+	dArr<sf::Texture> pickupTextures;
+
+	//aura
+
 
 	//background
 	sf::Texture background;

@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <fstream>
 
-enum textures { player = 0, laser1, missile1, mainGun1 };
+enum textures { player = 0, laser1, missile1, mainGun1, aura };
 
 Game::Game(sf::RenderWindow* window)
 {
@@ -63,6 +63,9 @@ void Game::initTextures()
 	this->textures.push_back(sf::Texture());
 	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
 
+	this->textures.push_back(sf::Texture());
+	this->textures[aura].loadFromFile("Textures/Aura/green.png");
+
 	sf::Texture temp;
 
 	//enemy
@@ -72,18 +75,15 @@ void Game::initTextures()
 	this->enemyTextures.add(sf::Texture(temp));
 
 	//pickup
-	temp.loadFromFile("Textures/Guns/hp.png");
+	temp.loadFromFile("Textures/Guns/health.png");
 	this->pickupTextures.add(sf::Texture(temp));
-	temp.loadFromFile("Textures/Guns/missile+.png");
+	temp.loadFromFile("Textures/Guns/bullet+.png");
 	this->pickupTextures.add(sf::Texture(temp));
-	temp.loadFromFile("Textures/Guns/missile++.png");
+	temp.loadFromFile("Textures/Guns/bullet++.png");
 	this->pickupTextures.add(sf::Texture(temp));
 
 	//background
-	this->background.loadFromFile("Textures/Background/background1.jpg");
-
-
-	//init aura textures
+	//this->background.loadFromFile("Textures/Background/background1.jpg");
 
 }
 
@@ -329,7 +329,7 @@ void Game::UpdateUIPlayer(int index)
 	{
 		this->followPlayerTexts.setPosition(
 			this->players[index].getPosition().x,
-			this->players[index].getPosition().y + 25.f);
+			this->players[index].getPosition().y + 15.f);
 
 		this->followPlayerTexts.setString((players[index].getHpAsString()));
 	}

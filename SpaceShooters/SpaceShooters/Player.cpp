@@ -1,10 +1,14 @@
 #include "Player.h"
+#include "SFML/Audio.hpp"
 
 unsigned Player::players = 0;
 
 enum controls { UP = 0, DOWN, LEFT, RIGHT, SHOOT };
 
 enum Weapons { LASER = 0, MISSILE1, MISSILE2 };
+
+sf::SoundBuffer soundBuffer;
+sf::Sound sound;
 
 Player::Player(std::vector<sf::Texture>& textures,
 	int UP, int DOWN,
@@ -49,6 +53,10 @@ Player::Player(std::vector<sf::Texture>& textures,
 		this->mainGunSprite.getGlobalBounds().width / 2,
 		this->mainGunSprite.getGlobalBounds().height / 2);
 
+	//aura
+	this->aura.setTexture(textures[4]);
+	this->aura.scale(0.9f, 0.9f);
+
 	/// timing for shoot
 	this->shootTimerMax = 25.f;
 	this->shootTimer = this->shootTimerMax;
@@ -69,6 +77,11 @@ Player::Player(std::vector<sf::Texture>& textures,
 
 	//aura
 
+
+	//music
+	soundBuffer.loadFromFile("Textures/Music/bullet.wav");
+
+	sound.setBuffer(soundBuffer);
 
 	/// current weapon
 	this->currentWeapon = LASER;
@@ -255,6 +268,11 @@ void Player::UpdateAccessories(const float& dt)
 		this->mainGunSprite.getPosition().x,
 		this->playerCenter.y);
 
+	//aura position 
+	this->aura.setPosition(
+		this->sprite.getPosition().x,
+		this->sprite.getPosition().y);
+
 	/// animation the main gun and correct after firing (shoot)
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 15.f)
 	{
@@ -276,6 +294,7 @@ void Player::Combact(const float& dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->controls[controls::SHOOT]))
 		&& this->shootTimer >= shootTimerMax)
 	{
+		sound.play();
 		if (this->currentWeapon == LASER)
 		{
 			/// create bullet
@@ -405,7 +424,7 @@ void Player::Update(sf::Vector2u windowBounds, const float& dt)
 
 void Player::Draw(sf::RenderTarget& target)
 {
-	//target.draw(this->aura);
+	target.draw(this->aura);
 
 	//ordering is important, bullets draw beforing the player/sprite
 	for (size_t i = 0; i < this->bullets.size(); i++)

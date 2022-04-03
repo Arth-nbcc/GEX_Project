@@ -16,6 +16,9 @@ private:
 	/// Accessories
 	sf::Sprite	 mainGunSprite;
 
+	//aura
+	sf::Sprite	aura;
+
 	//Bullet class
 	dArr<Bullet> bullets;
 
