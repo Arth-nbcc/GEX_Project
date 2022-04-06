@@ -55,7 +55,13 @@ Player::Player(std::vector<sf::Texture>& textures,
 
 	//aura
 	this->aura.setTexture(textures[4]);
+	this->aura.setOrigin(
+		this->aura.getGlobalBounds().width / 2,
+		this->aura.getGlobalBounds().height / 2
+	);
+
 	this->aura.scale(0.9f, 0.9f);
+	//this->aura.rotate(10.f * this->dtMultiplier);
 
 	/// timing for shoot
 	this->shootTimerMax = 25.f;
@@ -269,9 +275,8 @@ void Player::UpdateAccessories(const float& dt)
 		this->playerCenter.y);
 
 	//aura position 
-	this->aura.setPosition(
-		this->sprite.getPosition().x,
-		this->sprite.getPosition().y);
+	this->aura.setPosition(playerCenter);
+	this->aura.rotate(10.f * dt * this->dtMultiplier);
 
 	/// animation the main gun and correct after firing (shoot)
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 15.f)

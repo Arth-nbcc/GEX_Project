@@ -1,7 +1,9 @@
 #include "TextTag.h"
 
-TextTag::TextTag(sf::Font* font, std::string text, sf::Color color,
-	sf::Vector2f position, unsigned int size, float timerMax)
+TextTag::TextTag(
+	sf::Font* font, std::string text, sf::Color color,
+	sf::Vector2f position, sf::Vector2f direction,
+	unsigned int size, float timerMax, bool accelerate)
 {
 	//dt
 	this->dtMultiplier = 60.f;
@@ -15,12 +17,13 @@ TextTag::TextTag(sf::Font* font, std::string text, sf::Color color,
 
 	//text speed, direction
 	this->speed = 2.5f;
-	this->direction.x = 0.f;
-	this->direction.y = -1.f;
+	this->direction.x = direction.x;
+	this->direction.y = direction.y;
 
 	//timers
 	this->timerMax = timerMax;
 	this->timer = this->timerMax;
+	this->accelerate = accelerate;
 
 }
 
@@ -30,14 +33,29 @@ TextTag::~TextTag()
 
 void TextTag::Update(const float& dt)
 {
-	//update timer
+	//Update timer
 	if (this->timer > 0.f)
 	{
-		this->timer -= 1.f * dt * dtMultiplier;
+		this->timer -= 1.f * dt * this->dtMultiplier;
 
-		this->text.move(
-			this->direction.x * this->speed * dt * dtMultiplier,
-			this->direction.y * this->speed * dt * dtMultiplier);
+		if (this->accelerate)
+		{
+			if (this->timer > this->timerMax / 2)
+			{
+				this->text.move(this->direction.x * (this->speed * 3.f) * dt * this->dtMultiplier,
+					this->direction.y * (this->speed * 35.f) * dt * this->dtMultiplier);
+			}
+			else
+			{
+				this->text.move(this->direction.x * this->speed * dt * this->dtMultiplier,
+					this->direction.y * this->speed * dt * this->dtMultiplier);
+			}
+		}
+		else
+		{
+			this->text.move(this->direction.x * this->speed * dt * this->dtMultiplier,
+				this->direction.y * this->speed * dt * this->dtMultiplier);
+		}
 	}
 	else
 	{

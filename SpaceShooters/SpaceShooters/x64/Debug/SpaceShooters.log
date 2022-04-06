@@ -15,52 +15,53 @@ D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShoote
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(169,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(178,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(179,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(184,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(187,36): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(188,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(197,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(204,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(211,9): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(211,9): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(213,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(213,38): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(220,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(228,19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(228,61): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(232,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(234,9): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(236,35): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(237,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(246,25): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(247,25): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(251,10): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(254,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(261,7): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(263,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(270,20): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(272,7): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(274,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(282,19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(286,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(288,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(291,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(291,46): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(295,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(299,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(304,10): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(306,23): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(311,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(314,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(316,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(326,12): warning C4018: '>=': signed/unsigned mismatch
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(358,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(361,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(368,6): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(370,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(372,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(382,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(437,19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(449,20): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(187,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(190,36): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(191,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(200,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(211,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(218,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(225,9): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(225,9): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(227,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(227,38): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(234,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(242,19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(242,61): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(246,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(248,9): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(250,35): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(251,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(260,25): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(265,10): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(274,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(281,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(288,7): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(290,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(297,20): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(299,7): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(301,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(309,19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(313,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(315,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(318,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(318,46): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(322,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(326,22): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(331,10): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(333,23): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(338,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(341,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(343,28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(353,12): warning C4018: '>=': signed/unsigned mismatch
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(385,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(388,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(395,6): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(397,13): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(399,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(409,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(464,19): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(476,20): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(68,25): warning C4018: '>=': signed/unsigned mismatch
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(67): message : while compiling class template member function 'T &dArr<T>::operator [](int)'
           with
@@ -75,5 +76,5 @@ D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShoote
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.h(40): message : see reference to class template instantiation 'dArr<Player>' being compiled
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(135,25): warning C4018: '>=': signed/unsigned mismatch
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(134): message : while compiling class template member function 'void dArr<TextTag>::remove(int)'
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(274): message : see reference to function template instantiation 'void dArr<TextTag>::remove(int)' being compiled
+D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(301): message : see reference to function template instantiation 'void dArr<TextTag>::remove(int)' being compiled
   SpaceShooters.vcxproj -> D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\x64\Debug\SpaceShooters.exe

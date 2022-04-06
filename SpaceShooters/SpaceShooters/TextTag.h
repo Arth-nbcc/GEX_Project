@@ -19,11 +19,12 @@ private:
 	float timerMax;
 	float timer;
 	bool follow;
+	bool accelerate;
 
 
 public:
 	TextTag(sf::Font* font, std::string text, sf::Color color,
-		sf::Vector2f position, unsigned int size, float timerMax);
+		sf::Vector2f position, sf::Vector2f direction, unsigned int size, float timerMax, bool accelerate);
 
 	virtual ~TextTag();
 

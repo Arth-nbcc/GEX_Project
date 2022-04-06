@@ -37,6 +37,7 @@ int main()
 		dt = clock.restart().asSeconds();
 		//std::cout << dt << "\n";
 
+
 		game.update(dt);
 		game.draw();
 	}

@@ -64,7 +64,7 @@ void Game::initTextures()
 	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
 
 	this->textures.push_back(sf::Texture());
-	this->textures[aura].loadFromFile("Textures/Aura/green.png");
+	this->textures[aura].loadFromFile("Textures/Aura/aura1.png");
 
 	sf::Texture temp;
 
@@ -175,10 +175,13 @@ void Game::update(const float& dt)
 										"-" + std::to_string(damage),	//Text
 										sf::Color::Red,					//color
 										sf::Vector2f(					//position
-											this->enemies[j].getPosition().x + 20.f,
-											this->enemies[j].getPosition().y - 20.f),
-										30, 20.f));						//size & timer
+											this->enemies[j].getPosition().x,
+											this->enemies[j].getPosition().y - 30.f),
+										sf::Vector2f(1.f, 0.f),			//position
+										24, 25.f, true));				//size, timer, Accelarate
 							}
+
+							std::string DeadText[5] = { "BOOM", "DESTROYED", "CRASHED", "DEFEATED", "KILLED" };
 
 							/// enemy dead						
 							if (this->enemies[j].getHP() <= 0)
@@ -186,6 +189,17 @@ void Game::update(const float& dt)
 								//score
 								int score = this->enemies[j].getHPMax();
 								this->players[i].gainScore(score);
+
+								//dead textTags
+								this->textTags.add(
+									TextTag(
+										&this->font,					//font
+										std::string(DeadText[rand() % 5]),	//Text
+										sf::Color::Cyan,					//color
+										sf::Vector2f(
+											this->enemies[j].getPosition()), //position
+										sf::Vector2f(1.f, 0.f),			//direction
+										36, 45.f, true));			//size, timer, Accelarate
 
 								//add pickups
 								int pickupChance = rand() % 10;
@@ -243,13 +257,26 @@ void Game::update(const float& dt)
 								"-" + std::to_string(damage),
 								sf::Color::Red,
 								sf::Vector2f(
-									this->players[k].getPosition().x + 20.f,
-									this->players[k].getPosition().y - 20.f),
-								30, 20.f));
+									this->players[k].getPosition()),
+								sf::Vector2f(0.f, -1.f),
+								30, 25.f, false));
 
 						//player death
 						if (!this->players[k].isAlive())
+						{
+							//dead textTags
+							this->textTags.add(
+								TextTag(
+									&this->font,					//font
+									std::string("YOU DEAD !"),		//Text
+									sf::Color::Cyan,					//color
+									sf::Vector2f(
+										this->players[k].getPosition()), //position
+									sf::Vector2f(0.f, -1.f),			//direction
+									60, 100.f, false));			//size, timer, Accelarate
+
 							this->playersAlive--;
+						}
 
 						this->enemies.remove(i);
 						return;
