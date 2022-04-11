@@ -8,7 +8,7 @@ Enemy::Enemy(dArr<sf::Texture>& textures, sf::Vector2u windowBounds,
 	sf::Vector2f scale,
 	int type, int playerFollowNr)
 {
-	this->dtMultiplier = 60.f;
+	this->dtMultiplier = 62.f;
 
 	this->textures = &textures;
 	this->type = type;
@@ -24,11 +24,11 @@ Enemy::Enemy(dArr<sf::Texture>& textures, sf::Vector2u windowBounds,
 	switch (this->type)
 	{
 	case MOVELEFT:
-		this->maxVelocity = rand() % 15 + 7;
-		this->hpMax = rand() % 3 + 1;
+		this->maxVelocity = rand() % 15 + 7;	//max is 0-14 and +7 (min) in that
+		this->hpMax = rand() % 4 + 5;
 		this->hp = this->hpMax;
 		this->damageMax = 3;
-		this->damageMin = 1;
+		this->damageMin = 2;
 		break;
 
 	case FOLLOW:
@@ -47,7 +47,7 @@ Enemy::Enemy(dArr<sf::Texture>& textures, sf::Vector2u windowBounds,
 	this->damageTimerMax = 5.f;
 	this->damageTimer = 0;
 
-	this->playerFollowNr = playerFollowNr; //when a enemy created it will assigned to player to follow it.
+	this->playerFollowNr = playerFollowNr; //when a enemy created, it will assigned to player to follow it.
 }
 
 Enemy::~Enemy()
@@ -91,9 +91,9 @@ void Enemy::Update(const float& dt, sf::Vector2f playerPosition)
 		normalizedDir = normalize(direction, vectorLength(direction));
 
 		if (normalizedDir.y > 0.3)
-			normalizedDir.y = 0.3;
-		else if (normalizedDir.y < -0.3)
-			normalizedDir.y = -0.3;
+			normalizedDir.y = 0.3;			//
+		else if (normalizedDir.y < -0.3)	//so i can dodge the enemy, it will not follow me all the way
+			normalizedDir.y = -0.3;			//
 
 		if (normalizedDir.x > -0.7)
 			normalizedDir.x = -0.7;

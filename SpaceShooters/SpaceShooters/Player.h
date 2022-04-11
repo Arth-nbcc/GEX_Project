@@ -5,6 +5,9 @@ class Player
 {
 private:
 	float dtMultiplier;
+	float keyTimeMax;
+	float keyTime;
+
 
 	int playerNr;
 
@@ -28,6 +31,7 @@ private:
 
 	int controls[5];
 
+	static dArr<sf::Texture> auraTextures;
 
 	/// player shooth movement
 	sf::Vector2f	currentVelocity;

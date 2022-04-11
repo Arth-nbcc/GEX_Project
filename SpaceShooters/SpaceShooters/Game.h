@@ -4,7 +4,6 @@
 #include "TextTag.h"
 #include "dArr.h"
 #include "Pickup.h"
-#include "SFML/Audio.hpp"
 
 class Game
 {
@@ -86,6 +85,7 @@ public:
 	void		DrawUI();
 	void		backgroundDraw();
 	void		initTextures();
+
 };
 
 ///NOTE: to acess member of a function or variable, we use . operator.

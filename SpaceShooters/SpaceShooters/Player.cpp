@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "SFML/Audio.hpp"
+#include <fstream>
 
 unsigned Player::players = 0;
 
@@ -25,7 +26,7 @@ Player::Player(std::vector<sf::Texture>& textures,
 
 {
 	//dt
-	this->dtMultiplier = 60.f;
+	this->dtMultiplier = 62.f;
 
 	/// update positions
 	/// player Center (player central point)
@@ -38,6 +39,7 @@ Player::Player(std::vector<sf::Texture>& textures,
 	/// player
 	this->sprite.setTexture(textures[0]);
 	this->sprite.setScale(0.20f, 0.20f);
+	this->sprite.setPosition(sf::Vector2f(100.f, 300.f));
 
 
 	/// bullet & missile
@@ -47,6 +49,7 @@ Player::Player(std::vector<sf::Texture>& textures,
 
 	/// Gun
 	this->mainGunSprite.setTexture(textures[3]);
+	this->mainGunSprite.setPosition(sf::Vector2f(100.f, 300.f));
 
 	//Gun position Center (same as player center point)
 	this->mainGunSprite.setOrigin(
@@ -266,6 +269,7 @@ void Player::setGunLevel(int gunLevel)
 	this->mainGunLevel = gunLevel;
 }
 
+
 /// Accessories for player
 void Player::UpdateAccessories(const float& dt)
 {
@@ -276,7 +280,7 @@ void Player::UpdateAccessories(const float& dt)
 
 	//aura position 
 	this->aura.setPosition(playerCenter);
-	this->aura.rotate(10.f * dt * this->dtMultiplier);
+	this->aura.rotate(5.f * dt * this->dtMultiplier);
 
 	/// animation the main gun and correct after firing (shoot)
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 15.f)
@@ -293,6 +297,7 @@ void Player::UpdateAccessories(const float& dt)
 			this->playerCenter.y);
 	}
 }
+
 
 void Player::Combact(const float& dt)
 {
@@ -353,44 +358,43 @@ void Player::Combact(const float& dt)
 						sf::Vector2f(0.2f, 0.2f), //scale
 						sf::Vector2f(1.0f, 0.f), //direction
 						10.f, 40.f, 2.f));
+			}
+			else if (this->mainGunLevel == 3)
+			{
 
+				this->bullets.add(
+					Bullet(missile1Texture,
+						sf::Vector2f(this->playerCenter.x, this->playerCenter.y - 40.f),   //position
+						sf::Vector2f(0.4f, 0.4f),  //scale
+						sf::Vector2f(1.f, 0.f),		//direction
+						2.f, 25.f, 1.f));			//initialVelocity, MaxVelocity, Accelaration
+
+				this->bullets.add(
+					Bullet(missile1Texture,
+						sf::Vector2f(this->playerCenter.x, this->playerCenter.y + 40.f),
+						sf::Vector2f(0.4f, 0.4f),
+						sf::Vector2f(1.f, 0.f),
+						2.f, 25.f, 1.f));
 			}
 
 			/// animate gun	(while fire)
 			this->mainGunSprite.move(-30.f, 0.f);
 		}
+
+		//TO-DO Future
 		else if (this->currentWeapon == MISSILE1)
 		{
-			//create missile 1 
-			this->bullets.add(
-				Bullet(missile1Texture,
-					sf::Vector2f(this->playerCenter.x, this->playerCenter.y - 40.f),   //position
-					sf::Vector2f(0.06f, 0.06f),  //scale
-					sf::Vector2f(1.f, 0.f),		//direction
-					2.f, 40.f, 1.f));			//initialVelocity, MaxVelocity, Accelaration
 
-			if (this->dualMissile1)
-			{
-				//create missile 1 
-				this->bullets.add(
-					Bullet(missile1Texture,
-						sf::Vector2f(this->playerCenter.x, this->playerCenter.y + 40.f),
-						sf::Vector2f(0.06f, 0.06f),
-						sf::Vector2f(1.f, 0.f),
-						2.f, 40.f, 1.f));
-			}
-			this->mainGunSprite.move(-30.f, 0.f);
 		}
 		else if (this->currentWeapon == MISSILE2)
 		{
-			if (this->dualMissile2)
-			{
 
-			}
 		}
 
 		this->shootTimer = 0; //RESET TIMER
 	}
+
+
 }
 
 Bullet& Player::getBullets(unsigned index)
@@ -447,7 +451,7 @@ void Player::Reset()
 {
 	this->hpMax = 20;
 	this->hp = this->hpMax;
-	this->sprite.setPosition(sf::Vector2f(100.f, 100.f));
+	this->sprite.setPosition(sf::Vector2f(100.f, 300.f));
 	this->setGunLevel(0);
 	this->bullets.clear();
 	this->mainGunLevel = 0;
@@ -455,6 +459,7 @@ void Player::Reset()
 	this->dualMissile2 = false;
 	this->currentVelocity.x = 0;
 	this->currentVelocity.y = 0;
+	this->score = 0;
 	this->level = 1;
 	this->exp = 0;
 	this->currentWeapon = LASER;

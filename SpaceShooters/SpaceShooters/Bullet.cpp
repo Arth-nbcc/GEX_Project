@@ -6,7 +6,7 @@ Bullet::Bullet(sf::Texture* texture,
 	sf::Vector2f direction, float initialVelocity,
 	float maxVelocity, float acceleration)
 {
-	this->dtMultiplier = 60.f;
+	this->dtMultiplier = 62.f;
 
 	this->texture = texture;
 	this->sprite.setTexture(*this->texture);

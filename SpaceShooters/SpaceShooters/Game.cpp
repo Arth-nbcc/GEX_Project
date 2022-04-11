@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include <fstream>
 
 enum textures { player = 0, laser1, missile1, mainGun1, aura };
@@ -6,8 +6,8 @@ enum textures { player = 0, laser1, missile1, mainGun1, aura };
 Game::Game(sf::RenderWindow* window)
 {
 	this->window = window;
-	//this->window->setFramerateLimit(60);
-	this->dtMultiplier = 60.f;
+	//this->window->setFramerateLimit(200);
+	this->dtMultiplier = 62.f;
 
 	/// init fonts
 	this->font.loadFromFile("Fonts/Dosis-Light.ttf");
@@ -30,6 +30,8 @@ Game::Game(sf::RenderWindow* window)
 
 	this->enemySpawnTimerMax = 35.f;
 	this->enemySpawnTimer = this->enemySpawnTimerMax;
+
+	//sounds
 
 
 	//2nd player
@@ -58,11 +60,12 @@ void Game::initTextures()
 	this->textures[laser1].loadFromFile("Textures/Guns/laser1.png");
 
 	this->textures.push_back(sf::Texture());
-	this->textures[missile1].loadFromFile("Textures/Guns/missile1.png");
+	this->textures[missile1].loadFromFile("Textures/Guns/missile.png");
 
 	this->textures.push_back(sf::Texture());
 	this->textures[mainGun1].loadFromFile("Textures/Guns/gun1.png");
 
+	//aura
 	this->textures.push_back(sf::Texture());
 	this->textures[aura].loadFromFile("Textures/Aura/aura1.png");
 
@@ -81,12 +84,12 @@ void Game::initTextures()
 	this->pickupTextures.add(sf::Texture(temp));
 	temp.loadFromFile("Textures/Guns/bullet++.png");
 	this->pickupTextures.add(sf::Texture(temp));
+	temp.loadFromFile("Textures/Guns/missile++.png");
+	this->pickupTextures.add(sf::Texture(temp));
 
 	//background
-	//this->background.loadFromFile("Textures/Background/background1.jpg");
-
+	this->background.loadFromFile("Textures/Background/background.jpg");
 }
-
 
 void Game::update(const float& dt)
 {
@@ -105,16 +108,6 @@ void Game::update(const float& dt)
 		this->keyTime = 0.f;
 	}
 
-	//if (this->paused)
-	//{
-	//	for (size_t i = 0; i < this->players.size(); i++)
-	//	{
-	//		if (this->players[i].isAlive())
-	//		{
-	//			change Aura here	//TO-DO thing
-	//		}
-	//	}
-	//}
 
 	if (this->players.size() > 0 && !this->paused)
 	{
@@ -125,6 +118,7 @@ void Game::update(const float& dt)
 		/// spawn enemies
 		if (this->enemySpawnTimer >= this->enemySpawnTimerMax)
 		{
+			//enemy
 			this->enemies.add(Enemy(
 				this->enemyTextures,
 				this->window->getSize(), //windowBounds is size of the window
@@ -181,7 +175,7 @@ void Game::update(const float& dt)
 										24, 25.f, true));				//size, timer, Accelarate
 							}
 
-							std::string DeadText[5] = { "BOOM", "DESTROYED", "CRASHED", "DEFEATED", "KILLED" };
+							std::string DeadText[9] = { "BOOM", "DESTROYED", "CRASHED", "DEFEATED", "KILLED", "GODLIKE!", "DOMINATED", "MURDERED", "TERMINATED" };
 
 							/// enemy dead						
 							if (this->enemies[j].getHP() <= 0)
@@ -194,22 +188,22 @@ void Game::update(const float& dt)
 								this->textTags.add(
 									TextTag(
 										&this->font,					//font
-										std::string(DeadText[rand() % 5]),	//Text
+										std::string(DeadText[rand() % 9]),	//Text
 										sf::Color::Cyan,					//color
 										sf::Vector2f(
 											this->enemies[j].getPosition()), //position
 										sf::Vector2f(1.f, 0.f),			//direction
-										36, 45.f, true));			//size, timer, Accelarate
+										36, 50.f, true));			//size, timer, Accelarate
 
 								//add pickups
 								int pickupChance = rand() % 10;
 
-								if (pickupChance > 7)
+								if (pickupChance > 8)
 								{
 									this->pickups.add(Pickup(
 										&this->pickupTextures,	//texture
 										this->enemies[j].getPosition(),	//position
-										rand() % 3,		//type
+										rand() % 4,		//type
 										150.f	//duration
 									));
 								}
@@ -315,7 +309,7 @@ void Game::update(const float& dt)
 					switch (this->pickups[i].getType())
 					{
 					case 0:		//HP
-						this->players[k].gainHP(this->players[k].getHpMax() / 5);
+						this->players[k].gainHP(this->players[k].getHpMax() / 4);
 						break;
 
 					case 1:		//Missile +
@@ -326,12 +320,13 @@ void Game::update(const float& dt)
 						this->players[k].setGunLevel(2);
 						break;
 
+					case 3:		//rockets
+						this->players[k].setGunLevel(3);
+						break;
+
 					default:
-						//TO-DO thing HP
-						if (this->players[k].getHp() <= 8)
-						{
-							this->players[k].setGunLevel(0);
-						}
+						//laser					
+						this->players[k].setGunLevel(0);
 						break;
 					}
 
@@ -420,7 +415,6 @@ void Game::backgroundDraw()
 
 void Game::InitUI()
 {
-
 	/// follow text init	(player health)
 	this->followPlayerTexts.setFont(this->font);
 	this->followPlayerTexts.setCharacterSize(14);
@@ -436,9 +430,8 @@ void Game::InitUI()
 	this->gameOverText.setCharacterSize(60);
 	this->gameOverText.setFillColor(sf::Color::Red);
 	this->gameOverText.setString(
-		"GAME OVER!\nScore: " +
-		std::to_string(this->score) +
-		"\n\nPress ENTER to RESTART");
+		"G a m e  O v e r !\n	 "
+		"\n\nENTER to play again");
 	this->gameOverText.setPosition(window->getSize().x / static_cast<float>(2) - 150.f, window->getSize().y / static_cast<float>(2));
 
 	//score Text

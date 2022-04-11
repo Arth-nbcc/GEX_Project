@@ -2,7 +2,7 @@
 
 Pickup::Pickup(dArr<sf::Texture>* textures, sf::Vector2f position, int type, float duration)
 {
-	this->dtMultiplier = 60.f;
+	this->dtMultiplier = 62.f;
 	this->textures = textures;
 	this->type = type;
 

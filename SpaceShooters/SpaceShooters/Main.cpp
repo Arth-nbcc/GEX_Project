@@ -12,7 +12,8 @@ int main()
 
 	sf::SoundBuffer soundBuffer;
 	sf::Sound sound;
-	//soundBuffer.loadFromFile("Textures/Music/MainMusic.ogg");
+
+	soundBuffer.loadFromFile("Textures/Music/spaceShooter.wav");
 
 	sound.setBuffer(soundBuffer);
 	sound.setLoop(true);
