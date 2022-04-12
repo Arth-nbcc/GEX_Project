@@ -67,7 +67,7 @@ void Game::initTextures()
 
 	//aura
 	this->textures.push_back(sf::Texture());
-	this->textures[aura].loadFromFile("Textures/Aura/aura1.png");
+	this->textures[aura].loadFromFile("Textures/Aura/aura4.png");
 
 	sf::Texture temp;
 
@@ -198,7 +198,7 @@ void Game::update(const float& dt)
 								//add pickups
 								int pickupChance = rand() % 10;
 
-								if (pickupChance > 8)
+								if (pickupChance > 6)
 								{
 									this->pickups.add(Pickup(
 										&this->pickupTextures,	//texture

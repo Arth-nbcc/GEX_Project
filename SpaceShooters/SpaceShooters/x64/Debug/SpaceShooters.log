@@ -1,43 +1,4 @@
-﻿  Enemy.cpp
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(44,49): warning C4244: 'return': conversion from 'const float' to 'const int', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(62,14): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(22,45): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
-          with
-          [
-              T=unsigned int
-          ]
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(27,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(35,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(42,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(94,25): warning C4305: '=': truncation from 'double' to 'T'
-          with
-          [
-              T=float
-          ]
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(96,26): warning C4305: '=': truncation from 'double' to 'T'
-          with
-          [
-              T=float
-          ]
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(99,26): warning C4305: '=': truncation from 'double' to 'T'
-          with
-          [
-              T=float
-          ]
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(101,87): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(68,25): warning C4018: '>=': signed/unsigned mismatch
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(67): message : while compiling class template member function 'T &dArr<T>::operator [](int)'
-          with
-          [
-              T=sf::Texture
-          ]
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(15): message : see reference to function template instantiation 'T &dArr<T>::operator [](int)' being compiled
-          with
-          [
-              T=sf::Texture
-          ]
-D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.cpp(13): message : see reference to class template instantiation 'dArr<sf::Texture>' being compiled
-  Game.cpp
+﻿  Game.cpp
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(44,49): warning C4244: 'return': conversion from 'const float' to 'const int', possible loss of data
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Enemy.h(62,14): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(138,7): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
@@ -116,5 +77,4 @@ D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShoote
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(135,25): warning C4018: '>=': signed/unsigned mismatch
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\dArr.h(134): message : while compiling class template member function 'void dArr<TextTag>::remove(int)'
 D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\SpaceShooters\Game.cpp(295): message : see reference to function template instantiation 'void dArr<TextTag>::remove(int)' being compiled
-  Generating Code...
   SpaceShooters.vcxproj -> D:\NBCC\Winter 2022\GEX Final Game Project\GEX_Project\SpaceShooters\x64\Debug\SpaceShooters.exe

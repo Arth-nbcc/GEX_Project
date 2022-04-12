@@ -42,18 +42,21 @@ void TextTag::Update(const float& dt)
 		{
 			if (this->timer > this->timerMax / 2)
 			{
-				this->text.move(this->direction.x * (this->speed * 3.f) * dt * this->dtMultiplier,
+				this->text.move(
+					this->direction.x * (this->speed * 3.f) * dt * this->dtMultiplier,
 					this->direction.y * (this->speed * 30.f) * dt * this->dtMultiplier);
 			}
 			else
 			{
-				this->text.move(this->direction.x * this->speed * dt * this->dtMultiplier,
+				this->text.move(
+					this->direction.x * this->speed * dt * this->dtMultiplier,
 					this->direction.y * this->speed * dt * this->dtMultiplier);
 			}
 		}
 		else
 		{
-			this->text.move(this->direction.x * this->speed * dt * this->dtMultiplier,
+			this->text.move(
+				this->direction.x * this->speed * dt * this->dtMultiplier,
 				this->direction.y * this->speed * dt * this->dtMultiplier);
 		}
 	}
